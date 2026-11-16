@@ -1,0 +1,126 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "show_page_title": true,
+        "heading_size": "h2",
+        "heading_seo": "h2",
+        "content_alignment": "center",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "contact_imp43U": {
+      "type": "contact",
+      "blocks": {
+        "content_xDpYCf": {
+          "type": "content",
+          "disabled": true,
+          "settings": {
+            "heading": "",
+            "heading_size": "h2",
+            "heading_seo": "h1",
+            "email_label": "",
+            "email_content": "",
+            "phone_label": "",
+            "phone_content": "",
+            "address_label": "",
+            "address_content": "",
+            "color_scheme": "scheme-1",
+            "overlay_color": "#dfdee1",
+            "overlay_opacity": 31
+          }
+        },
+        "form_QXCB4H": {
+          "type": "form",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "heading": "Ha bisogno di assistenza?",
+            "heading_size": "h4",
+            "heading_seo": "h5",
+            "description": "Hai domande sul tuo ordine, sulle taglie o sui nostri modelli? Il nostro team di assistenza clienti è qui per aiutarti!",
+            "description_size": "text-lg",
+            "form_button_text": "Invia"
+          }
+        }
+      },
+      "block_order": [
+        "content_xDpYCf",
+        "form_QXCB4H"
+      ],
+      "name": "Contact",
+      "settings": {
+        "fullwidth": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 10
+      }
+    },
+    "contact_R3kJNK": {
+      "type": "contact",
+      "blocks": {
+        "content_gmmHzt": {
+          "type": "content",
+          "settings": {
+            "heading": "GET IN TOUCH",
+            "heading_size": "h2",
+            "heading_seo": "h1",
+            "email_label": "Email address",
+            "email_content": "support@adoreelite.com",
+            "phone_label": "Call us",
+            "phone_content": "+1 (213) 555-0123",
+            "address_label": "Location",
+            "address_content": "<p>123 Fashion Avenue,<br/>Los Angeles, CA 90001, USA</p>",
+            "color_scheme": "scheme-1",
+            "overlay_color": "#dfdee1",
+            "overlay_opacity": 31
+          }
+        },
+        "form_X6emcf": {
+          "type": "form",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "heading": "Need Assistance?",
+            "heading_size": "h3",
+            "heading_seo": "h2",
+            "description": "Have a question about your order, sizing, or our styles? Our customer care team is here to help! Whether it's shipping info, product details, or returns, we're just a message away.",
+            "description_size": "text-lg",
+            "form_button_text": "Contact us"
+          }
+        }
+      },
+      "block_order": [
+        "content_gmmHzt",
+        "form_X6emcf"
+      ],
+      "disabled": true,
+      "name": "Contact",
+      "settings": {
+        "fullwidth": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "contact_imp43U",
+    "contact_R3kJNK"
+  ]
+}

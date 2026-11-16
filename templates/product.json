@@ -1,0 +1,177 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "sku_V4wYid": {
+          "type": "sku",
+          "settings": {}
+        },
+        "title_8DjNPp": {
+          "type": "title",
+          "settings": {
+            "title_size": "h4"
+          }
+        },
+        "price_q7VmNW": {
+          "type": "price",
+          "settings": {
+            "hide_shipping_content": true
+          }
+        },
+        "mp_size_chart_size_guide_mp_inline_button_j7nFbQ": {
+          "type": "shopify://apps/mp-size-chart/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
+          "settings": {}
+        },
+        "variant_UnBUme": {
+          "type": "variant",
+          "settings": {
+            "enable_size_chart": false,
+            "size_chart_text": "Guida alle Taglie",
+            "size_chart": "size-chart"
+          }
+        },
+        "custom_liquid_eczaVC": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- assign product_list = product.metafields.custom.linked_products.value -%}\n\n{%- if product_list != blank -%}\n  <div class=\"product-siblings-wrapper\" style=\"margin: 20px 0;\">\n    <div style=\"margin-bottom: 12px; display: flex; align-items: center; gap: 8px;\">\n      <span style=\"font-size: 14px; letter-spacing: 1px; color: #333;\">\n        Colori disponibili:\n      </span>\n      <span id=\"active-color-name\" style=\"font-size: 14px; color: #161616; font-weight: 600; transition: opacity 0.3s;\">\n        {{ product.metafields.custom.colore.value.label }}\n      </span>\n    </div>\n    \n    <div style=\"display: flex; gap: 12px; flex-wrap: wrap; align-items: center;\">\n      {%- for sibling in product_list -%}\n        \n        {%- comment -%} \n          Accediamo ai campi del Metaobject usando le chiavi confermate: 'color' e 'label'\n        {%- endcomment -%}\n        {%- assign color_pattern = sibling.metafields.custom.colore.value -%}\n        {%- assign hex_color = color_pattern.color -%}\n        {%- assign color_name = color_pattern.label -%}\n        \n        <a href=\"{{ sibling.url }}\" \n           style=\"\n             width: 38px; \n             height: 38px; \n             border-radius: 50%; \n             border: 1px solid {% if sibling.id == product.id %}#000000{% else %}#e2e2e2{% endif %};\n             padding: 2px;\n             display: block;\n             background: #fff;\n             transition: all 0.2s ease-in-out;\n             cursor: pointer;\n           \"\n           onmouseover=\"\n             document.getElementById('active-color-name').innerText = '{{ color_name | escape }}';\n             document.getElementById('active-color-name').style.opacity = '1';\n             this.style.borderColor='#000';\n             this.style.transform='scale(1.1)';\n           \"\n           onmouseout=\"\n             document.getElementById('active-color-name').innerText = '';\n             document.getElementById('active-color-name').style.opacity = '0';\n             {% if sibling.id != product.id %}this.style.borderColor='#e2e2e2';{% endif %}\n             this.style.transform='scale(1)';\n           \"\n        >\n          <span style=\"\n            display: block;\n            width: 100%;\n            height: 100%;\n            border-radius: 50%;\n            background-color: {{ hex_color | default: '#cccccc' }};\n            {% if color_pattern.immagine %}\n              background-image: url({{ color_pattern.immagine | img_url: '60x60', crop: 'center' }});\n              background-size: cover;\n            {% endif %}\n          \"></span>\n        </a>\n      {%- endfor -%}\n    </div>\n  </div>\n{%- endif -%}"
+          }
+        },
+        "quantity_zbkraN": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "pickup_rQkdFC": {
+          "type": "pickup",
+          "settings": {}
+        },
+        "button_C7ydG8": {
+          "type": "button",
+          "settings": {
+            "dynamic_checkout_btn": true,
+            "show_recipient_form": true
+          }
+        },
+        "description_tV68wW": {
+          "type": "description",
+          "settings": {}
+        },
+        "text_icon_niXw8D": {
+          "type": "text_icon",
+          "settings": {
+            "enable_background": true,
+            "list_style": "grid",
+            "icon_size": "small",
+            "text_1": "Spedito in 3/5 giorni lavorativi",
+            "text_2": "Reso entro 30 giorni",
+            "text_3": "",
+            "text_4": ""
+          }
+        },
+        "collapsible_content_xDHXhz": {
+          "type": "collapsible_content",
+          "settings": {
+            "type_of_content": "option1",
+            "open_first_content": false,
+            "show_description": false,
+            "description_heading": "Description",
+            "heading_1": "SPEDIZIONE E RESI",
+            "description_1": "<p><strong>Spedizione:</strong><br/>Offriamo consegne rapide e affidabili in tutto il paese. Gli ordini vengono generalmente elaborati entro 2/3 giorni lavorativi.<br/><br/><strong>Resi:</strong><br/>Non è proprio quello che cercavi? Nessun problema. Puoi restituire qualsiasi articolo non indossato e non utilizzato entro 30 giorni dalla consegna per ottenere un rimborso o una sostituzione.</p>",
+            "pageid_1": "contact",
+            "heading_2": "COMPOSIZIONE",
+            "description_2": "<p>{{ product.metafields.custom.composizione | metafield_tag }}</p>",
+            "pageid_2": "about-us",
+            "heading_3": "SUPPORTO",
+            "description_3": "<p>Hai bisogno di aiuto per scegliere la taglia giusta? Consulta la nostra guida alle taglie.</p><p>Siamo qui per te. Contattaci tramite WhatsApp oppure via email e riceverai una risposta entro 24 ore.<br/>WhatsApp: +39 347 500 2811<br/>Email: shoponline@caporiccio.it<br/><br/><strong>Orari del servizio clienti:</strong> Lun–Ven, 9:00–17:00</p>",
+            "pageid_3": "contact"
+          }
+        },
+        "share_epQTL7": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "sku_V4wYid",
+        "title_8DjNPp",
+        "price_q7VmNW",
+        "mp_size_chart_size_guide_mp_inline_button_j7nFbQ",
+        "variant_UnBUme",
+        "custom_liquid_eczaVC",
+        "quantity_zbkraN",
+        "pickup_rQkdFC",
+        "button_C7ydG8",
+        "description_tV68wW",
+        "text_icon_niXw8D",
+        "collapsible_content_xDHXhz",
+        "share_epQTL7"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "section_layout": "contain",
+        "enable_stickyProduct": true,
+        "product_template_type": "template2",
+        "image_size": "adapt",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
+    "featured_collection_bfaGbW": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "color_scheme": "",
+        "enable_slider": true,
+        "enable_card": false,
+        "heading": "Pensiamo possano interessarti",
+        "heading_size": "h5",
+        "heading_seo": "h6",
+        "description": "",
+        "description_size": "text-base",
+        "show_collection_title": false,
+        "collection": "giacche",
+        "image_size": "portrait",
+        "products_to_show": 8,
+        "column_per_row": 4,
+        "mobile_item_per_row": "2",
+        "column_gap": 50,
+        "column_gap_mobile": 4,
+        "top_space_desktop": 75,
+        "bottom_space_desktop": 75,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "17705408081871d8bb": {
+      "type": "apps",
+      "blocks": {
+        "mp_size_chart_size_guide_mp_inline_button_tMqLrE": {
+          "type": "shopify://apps/mp-size-chart/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mp_size_chart_size_guide_mp_inline_button_tMqLrE"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "featured_collection_bfaGbW",
+    "17705408081871d8bb"
+  ]
+}

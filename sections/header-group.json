@@ -1,0 +1,161 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_NtVGxP": {
+          "type": "announcement",
+          "disabled": true,
+          "settings": {
+            "announcement_text": "Ogni 2 articoli, il meno caro al 50%"
+          }
+        },
+        "announcement_UyqMac": {
+          "type": "announcement",
+          "settings": {
+            "announcement_text": "<strong>Spedizioni GRATIS a partire da 99 €</strong>"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_NtVGxP",
+        "announcement_UyqMac"
+      ],
+      "custom_css": [
+        ".page--width {padding-inline: 0;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "home_page_only": false,
+        "enable_count_down": false,
+        "date": "2026/10/10",
+        "auto_rotate": true,
+        "change_slides_speed": 8,
+        "enable_currency_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_mHDJaR": {
+          "type": "mega-menu",
+          "settings": {
+            "menu_label": "Maglieria",
+            "collection_list": [
+              "gilet"
+            ],
+            "content_subheading_1": "",
+            "content_heading_1": "",
+            "content_link_1": "",
+            "content_subheading_2": "",
+            "content_heading_2": "",
+            "content_link_2": "",
+            "content_subheading_3": "",
+            "content_heading_3": "",
+            "content_link_3": "",
+            "content_subheading_4": "",
+            "content_heading_4": "",
+            "content_link_4": "",
+            "content_subheading_5": "",
+            "content_heading_5": "",
+            "content_link_5": ""
+          }
+        },
+        "mega_menu_9Ne4d9": {
+          "type": "mega-menu",
+          "settings": {
+            "menu_label": "SHOP",
+            "collection_list": [],
+            "content_subheading_1": "50% off",
+            "content_heading_1": "Women Jeans",
+            "content_link_1": "shopify://collections",
+            "content_subheading_2": "80% off",
+            "content_heading_2": "WOMEN TRENDY CLOTHES",
+            "content_link_2": "shopify://collections/all",
+            "content_subheading_3": "",
+            "content_heading_3": "",
+            "content_link_3": "",
+            "content_subheading_4": "",
+            "content_heading_4": "",
+            "content_link_4": "shopify://collections",
+            "content_subheading_5": "",
+            "content_heading_5": "",
+            "content_link_5": ""
+          }
+        },
+        "mega_menu_GEyANU": {
+          "type": "mega-menu",
+          "settings": {
+            "menu_label": "WOMEN",
+            "collection_list": [],
+            "content_subheading_1": "SALE 50% OFF",
+            "content_heading_1": "Elevate Your Everyday",
+            "content_link_1": "shopify://collections",
+            "content_subheading_2": "Sale Alert: 20% Off",
+            "content_heading_2": "Chic Bottoms",
+            "content_link_2": "shopify://collections/frontpage",
+            "content_subheading_3": "Refresh 20% Off",
+            "content_heading_3": "Winter Vibes",
+            "content_link_3": "shopify://collections",
+            "content_subheading_4": "SALE 20% OFF",
+            "content_heading_4": "Bag Crush",
+            "content_link_4": "shopify://collections/all",
+            "content_subheading_5": "Fresh Arrivals",
+            "content_heading_5": "Summer & Winter",
+            "content_link_5": "shopify://collections"
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_mHDJaR",
+        "mega_menu_9Ne4d9",
+        "mega_menu_GEyANU"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 768px) {.site--logo .logo-img {width: 100px; }}"
+      ],
+      "settings": {
+        "menu": "main-menu",
+        "secondary_menu": "main-menu",
+        "desktop_menu_position": "logo-left-menu--center",
+        "enable_menu_background": true,
+        "sticky_header": "is-sticky",
+        "transparent_header": true,
+        "show_search": true,
+        "show_account_icon": true,
+        "show_cart_icon": true,
+        "enable_account": true,
+        "enable_social_account": true,
+        "enable_localiztion": true,
+        "enable_currency_selector": false,
+        "enable_language_selector": false,
+        "content_heading": "Trending this Season",
+        "link_text": "Scopri",
+        "url": "shopify://collections",
+        "page_1": "about-us",
+        "page_2": "contact",
+        "page_3": "",
+        "email_placeholder": "Email",
+        "email": "shoponline@caporiccio.it",
+        "phone_placeholder": "Servizio Clienti",
+        "phone": "0771.519000"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

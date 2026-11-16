@@ -1,0 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-register",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "CREA UN ACCOUNT",
+        "heading_size": "h4",
+        "heading_seo": "h1",
+        "description": "",
+        "description_size": "text-lg",
+        "content_alignment": "left",
+        "heading_side": "Goditi vantaggi esclusivi",
+        "content_side": "<h6></h6><p>✔️ Accedi ai Prodotti Esclusivi per Membri<br/>✔️ Goditi il Supporto Premium<br/>✔️ Sblocca Esperienze Personalizzate</p><h1></h1><h5></h5><p><br/><br/><br/><br/></p>",
+        "top_space_desktop": 120,
+        "bottom_space_desktop": 120,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

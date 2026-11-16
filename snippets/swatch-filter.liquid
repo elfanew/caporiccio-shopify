@@ -1,0 +1,56 @@
+{%- liquid
+  assign swatch_color = value.swatch.color
+  assign swatch_image = value.swatch.image
+  assign swatch_label = value.label | escape
+
+  assign swatch_style = ''
+  if swatch_image != blank
+    assign swatch_image_url = swatch_image | image_url: width: 50
+    assign swatch_style = 'background-image: url(' | append: swatch_image_url | append: '); background-size: cover;'
+  elsif swatch_color != blank
+    assign swatch_style = 'background-color: ' | append: swatch_color | append: ';'
+  else
+    assign color_handle = swatch_label | handle
+    assign swatch_style = 'background-color: ' | append: color_handle | append: ';'
+  endif
+-%}
+
+<!-- Solo il pallino -->
+<span class="swatch-filter-item" 
+      style="{{ swatch_style }}" 
+      title="{{ swatch_label }}">
+</span>
+
+<style>
+  /* Stile base del cerchietto */
+  .swatch-filter-item {
+    display: inline-block;
+    width: 24px;   
+    height: 24px; 
+    margin: 2px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1); /* Bordo sottile per definire i colori chiari */
+    background-position: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Feedback visivo minimo quando passi sopra col mouse */
+  .swatch-filter-item:hover {
+    transform: scale(1.1); /* Leggero ingrandimento */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* STATO SELEZIONATO (CHECKED) */
+  /* Adatta i selettori in base alla struttura precisa del tuo tema */
+  
+  /* Se l'input è dentro una label che contiene lo span */
+  input:checked + label .swatch-filter-item,
+  /* Se l'input è subito prima dello span */
+  input:checked + .swatch-filter-item {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000; /* Doppio anello: bianco interno, nero esterno */
+    border-color: transparent;
+  }
+</style>

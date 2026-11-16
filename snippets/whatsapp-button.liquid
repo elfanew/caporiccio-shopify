@@ -1,0 +1,60 @@
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 100px;
+    right: 22px;
+    background-color: #25d366;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.08);
+  }
+
+  .whatsapp-icon {
+    width: 34px;
+    height: 34px;
+    fill: white;
+    flex-shrink: 0;
+  }
+
+  .whatsapp-text {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .whatsapp-float {
+      bottom: 85px;
+      right: 15px;
+      width: 52px;
+      height: 52px;
+    }
+    .whatsapp-icon {
+      width: 30px;
+      height: 30px;
+    }
+  }
+</style>
+
+<a
+  href="https://wa.me/393475002811"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contattaci su WhatsApp"
+>
+  <svg class="whatsapp-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-4.713 1.262 1.262-4.669-0.292-0.508c-1.207-2.100-1.847-4.507-1.847-6.924 0-7.435 6.050-13.485 13.485-13.485s13.485 6.050 13.485 13.485c0 7.435-6.050 13.485-13.485 13.485zM21.960 18.828c-0.305-0.153-1.802-0.890-2.082-0.992s-0.483-0.153-0.686 0.153c-0.203 0.305-0.788 0.992-0.966 1.195s-0.356 0.230-0.661 0.077c-0.305-0.153-1.288-0.475-2.454-1.513-0.908-0.810-1.520-1.809-1.698-2.114s-0.018-0.470 0.134-0.622c0.138-0.137 0.305-0.356 0.458-0.534s0.203-0.305 0.305-0.509c0.102-0.203 0.051-0.381-0.025-0.534s-0.686-1.653-0.940-2.261c-0.248-0.593-0.499-0.513-0.686-0.522-0.178-0.008-0.381-0.010-0.584-0.010s-0.533 0.076-0.813 0.381c-0.280 0.305-1.067 1.043-1.067 2.543s1.093 2.951 1.245 3.155c0.153 0.203 2.146 3.278 5.199 4.596 0.726 0.313 1.293 0.500 1.735 0.640 0.729 0.232 1.393 0.199 1.918 0.121 0.585-0.087 1.802-0.737 2.056-1.449s0.254-1.321 0.178-1.449c-0.076-0.127-0.280-0.203-0.584-0.356z"/>
+  </svg>
+  <span class="whatsapp-text">Scrivici su WhatsApp</span>
+</a>

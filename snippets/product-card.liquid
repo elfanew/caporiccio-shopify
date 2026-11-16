@@ -1,0 +1,152 @@
+{%- assign current_variant = product_card.selected_or_first_available_variant -%}
+{%- assign product_siblings = product_card.metafields.custom.linked_products.value -%}
+
+{%- liquid
+  if media_ratio == 'landscape'
+    assign mediaratio = 75
+  elsif media_ratio == 'square'
+    assign mediaratio = 100
+  elsif media_ratio == 'portrait'
+    assign mediaratio = 125
+  else
+    if product_card.featured_media != blank
+      assign mediaratio = 1 | divided_by: product_card.featured_media.preview_image.aspect_ratio | times: 100
+    else
+      assign mediaratio = 100
+    endif
+  endif
+-%}
+
+<product-card
+  class="product-card-wrapper {% if settings.card_effect == "zoom"%} zoom-image--effect{% endif %} {% if settings.card_style == "card"%} card-true{% endif %} {% if slider %} swiper-slide{% endif %} product-information--wrapper {% if settings.enable_card_border %}border-true{% endif %}"
+  data-product-info
+>
+  <div class="product-card-media">
+    <a
+      href="{{ product_card.url | within : collection }}"
+      class="media-ratio main-card-image"
+      style="--media-ratio:{{ mediaratio }}%"
+    >
+      {%- if product_card.featured_media != blank -%}
+        <img
+          src="{{ product_card.featured_media | image_url: width: 533 }}"
+          alt="{{ product_card.featured_media.alt | escape }}"
+          class="product-card--img"
+          loading="lazy"
+          width="{{ product_card.featured_media.width }}"
+          height="{{ product_card.featured_media.height }}"
+        >
+      {%- endif -%}
+    </a>
+
+    {% render 'badges', product_card: product_card, section: section, current_variant: current_variant %}
+
+    {% if content != false and search != true %}
+      <div class="product-card-buttons">
+        {%- if product_siblings != blank -%}
+          <style>
+            .card-siblings-overlay {
+              position: relative;
+              margin-bottom: 4px;
+              width: 100%;
+            }
+            .sibling-swatch {
+              position: relative;
+              transition: transform 0.2s ease-in-out;
+            }
+            .sibling-swatch:hover {
+              transform: scale(1.2);
+              z-index: 10;
+              border-color: #000 !important;
+            }
+            /* Tooltip personalizzato per il nome colore */
+            .sibling-swatch::after {
+              content: attr(data-color-label);
+              position: absolute;
+              bottom: 100%;
+              left: 50%;
+              transform: translateX(-50%) translateY(-5px);
+              background: #000;
+              color: #fff;
+              padding: 4px 8px;
+              font-size: 8px;
+              border-radius: 2px;
+              white-space: nowrap;
+              opacity: 0;
+              pointer-events: none;
+              transition: opacity 0.2s ease;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+            .sibling-swatch:hover::after {
+              opacity: 1;
+            }
+          </style>
+
+          <div class="card-siblings-overlay">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-start; padding: 5px 0;">
+              {%- for sibling in product_siblings -%}
+                {%- assign sibling_color = sibling.metafields.custom.colore.value -%}
+                <a
+                  href="{{ sibling.url }}"
+                  class="sibling-swatch"
+                  data-color-label="{{ sibling_color.label | escape }}"
+                  style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid {% if sibling.id == product_card.id %}#000{% else %}#e2e2e2{% endif %}; padding: 2px; background: #fff; display: block;"
+                >
+                  <span
+                    style="
+                      display: block; width: 100%; height: 100%; border-radius: 50%; background-color: {{ sibling_color.color | default: '#ccc' }};
+                      {% if sibling_color.immagine %}
+                        background-image: url({{ sibling_color.immagine | img_url: '40x40', crop: 'center' }});
+                        background-size: cover;
+                      {% endif %}
+                    "
+                  ></span>
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {% render 'card-form', product: product_card, product_form_id: 'form-', append: product_card.id %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="product-card--text text-align-{{ settings.text_alignment }}">
+    <span class="product-card-title">
+      <a href="{{ product_card.url | within : collection }}">{{ product_card.title | strip_html }}</a>
+    </span>
+
+    <product-price-list class="product-price-list" id="product-price-list-{{ product_card.id }}-{{ section.id }}">
+      {%- assign current_variant = product_card.selected_or_first_available_variant -%}
+
+      {%- if current_variant.compare_at_price > current_variant.price -%}
+        <span class="product-price-compare" style="text-decoration: line-through; color: #999; margin-right: 5px;">
+          {{ current_variant.compare_at_price | money }}
+        </span>
+      {%- endif -%}
+
+      <product-sale-price class="product-price-actual">
+        <span
+          class="product-actual-price"
+          style="{% if current_variant.compare_at_price > current_variant.price %}color: black; font-size: 16px;{% endif %}"
+        >
+          {{ current_variant.price | money }}
+        </span>
+      </product-sale-price>
+    </product-price-list>
+  </div>
+</product-card>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'card-form', product: product_card, product_form_id: 'form-' |
+    append: product_card.id %}"
+  to: "{% render 'card-form', product: product_card, product_form_id: 'form-', append:
+    product_card.id %}"
+  position: 4322..4420
+{% endcomment %}

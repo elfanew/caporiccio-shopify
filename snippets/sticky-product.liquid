@@ -1,0 +1,433 @@
+{% liquid
+  assign pre_order = false
+  if settings.enable_preorder and current_variant.inventory_quantity <= 0 and current_variant.inventory_policy == 'continue'
+    assign pre_order = true
+  endif
+  assign selected_product = product.selected_or_first_available_variant
+  assign price = selected_product.price | default: 1999
+  assign money_price = price | money
+%}
+<sticky-bar-product
+  class="product-sticky-bar block color-{{ section.settings.color_scheme }}"
+  data-section="{{ section.id }}"
+>
+  <!-- DESKTOP / TABLET LAYOUT -->
+  <div class="sticky-bar-product-wrapper flex align-items-center justify-content-between sticky-bar-desktop-layout">
+    <div class="flex align-items-start">
+      <div class="sticky-bar-product-img">
+        {%- if product.selected_or_first_available_variant.featured_media != null -%}
+          {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+        {% else %}
+          {%- assign featured_media = product.featured_media -%}
+        {% endif %}
+        {% if featured_media != blank %}
+          <img
+            src="{{ featured_media | image_url: width: 100 }}"
+            width="100"
+            height="100"
+            loading="lazy"
+            data-sticky-image
+          >
+        {% else %}
+          {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+      <div class="sticky-bar-product-info">
+        <span class="sticky-bar-product-title">{{ product.title | escape }}</span>
+        <div
+          id="price-{{ section.id }}"
+          class=" product-price-wrapper product-main-price no-js-hidden"
+          role="status"
+          data-main-price
+          {{ block.shopify_attributes }}
+        >
+          <product-price-list class="product-price-list" id="product-price-list-{{ section.id }}">
+            {% render 'price', product: product, section: section %}
+          </product-price-list>
+          {% unless block.settings.hide_shipping_content %}
+            {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+              <span class="text-sm  product-tax-shipping">
+                {%- if cart.taxes_included -%}
+                  <!-- {{ 'products.product.include_taxes' | t }} -->
+                  Taxes included
+                {%- endif -%}
+                {%- if shop.shipping_policy.body != blank -%}
+                  {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+          {% endunless %}
+          {% if product != blank %}
+            <div {{ block.shopify_attributes }}>
+              {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+              {%- form 'product', product, id: product_form_installment_id, class: 'text-small' -%}
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                {{ form | payment_terms }}
+              {%- endform -%}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-bar-desktop-center">
+      {%- assign sibling_products = product.metafields.custom.linked_products.value -%}
+      {%- if sibling_products != blank -%}
+        <div class="sticky-bar-color-section">
+          <span class="sticky-bar-option-label">{{ product.metafields.custom.colore.value.label | default: 'Colore' }}:</span>
+          <div class="sticky-bar-color-swatches">
+            {%- for sibling in sibling_products -%}
+              {%- assign color_meta = sibling.metafields.custom.colore.value -%}
+              <a
+                href="{{ sibling.url }}"
+                class="sticky-color-dot{% if sibling.id == product.id %} is-active{% endif %}"
+                title="{{ color_meta.label }}"
+                aria-label="{{ color_meta.label }}"
+                style="background-color: {{ color_meta.color | default: '#cccccc' }};"
+              ></a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- liquid
+        assign size_options_name = settings.sizename | downcase
+        assign sticky_size_label = 'Taglia'
+        assign sticky_size_value = blank
+        assign sticky_size_position = 0
+        for option in product.options_with_values
+          assign option_name = option.name | downcase
+          if size_options_name contains option_name
+            assign sticky_size_label = option.name
+            assign sticky_size_value = option.selected_value
+            assign sticky_size_position = option.position
+            break
+          elsif option_name contains 'size'
+            assign sticky_size_label = option.name
+            assign sticky_size_value = option.selected_value
+            assign sticky_size_position = option.position
+            break
+          elsif option_name contains 'taglia'
+            assign sticky_size_label = option.name
+            assign sticky_size_value = option.selected_value
+            assign sticky_size_position = option.position
+            break
+          endif
+        endfor
+        if sticky_size_value == blank and product.options_with_values.size > 0
+          assign fallback_size_option = product.options_with_values | last
+          assign sticky_size_label = fallback_size_option.name
+          assign sticky_size_value = fallback_size_option.selected_value
+          assign sticky_size_position = fallback_size_option.position
+        endif
+        if sticky_size_value == blank
+          assign sticky_size_value = current_variant.option3 | default: current_variant.option2 | default: current_variant.option1
+        endif
+      -%}
+      {% if sticky_size_value != blank %}
+        <div class="sticky-bar-size-section">
+          <span class="sticky-bar-option-label">{{ sticky_size_label }}:</span>
+          <span class="sticky-bar-size-value" data-option-label="{{ sticky_size_position }}">{{ sticky_size_value }}</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <button
+      type="submit"
+      name="add"
+      id="sticky-add-to-cart-{{ section.id }}"
+      class="atc-button {{ settings.button_font }}-font"
+      form="{{ 'product-form-' | append: section.id }}"
+      data-sticky-atc-wrapper
+      {% unless current_variant.available %}
+        disabled
+      {% endunless %}
+      {% if settings.enable_cartdrawer %}
+        data-add-to-cart
+      {% endif %}
+      data-add-to-cart-main
+    >
+      <span data-add-to-cart-text>
+        {%- unless current_variant.available -%}
+          <span class="add-to-cart-text">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.01 3H11.76V1.75C11.76 0.79 10.98 0 10.01 0H6C5.04 0 4.25 0.78 4.25 1.75V3H2C0.9 3 0 3.89 0 5V14C0 15.1 0.89 16 2 16H14C15.1 16 16 15.11 16 14V5C16 3.9 15.11 3 14 3H14.01ZM5.76 1.75C5.76 1.61 5.87 1.5 6.00997 1.5H10.02C10.16 1.5 10.27 1.61 10.27 1.75V3H5.77V1.75H5.76ZM14.51 14.01C14.51 14.28 14.29 14.51 14.01 14.51H2.01C1.74 14.51 1.51 14.29 1.51 14.01V5.01C1.51 4.74 1.73 4.51 2.01 4.51H4.26V6.01H5.76V4.51H10.26V6.01H11.76V4.51H14.01C14.28 4.51 14.51 4.73 14.51 5.01V14.01Z" fill="currentColor"/>
+            </svg>
+          </span>
+        {%- else -%}
+          <span class="add-to-cart-text">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.3831 2.625H9.55499V1.53125C9.55499 0.69125 8.92124 0 8.13312 0H4.87501C4.09501 0 3.45313 0.6825 3.45313 1.53125V2.625H1.625C0.731251 2.625 0 3.40375 0 4.375V12.25C0 13.2125 0.723126 14 1.625 14H11.375C12.2687 14 13 13.2212 13 12.25V4.375C13 3.4125 12.2769 2.625 11.375 2.625H11.3831ZM4.68001 1.53125C4.68001 1.40875 4.76938 1.3125 4.88311 1.3125H8.14124C8.25499 1.3125 8.34437 1.40875 8.34437 1.53125V2.625H4.68813V1.53125H4.68001ZM11.7894 12.2587C11.7894 12.495 11.6106 12.6962 11.3831 12.6962H1.63313C1.41375 12.6962 1.22688 12.5037 1.22688 12.2587V4.38375C1.22688 4.1475 1.40563 3.94625 1.63313 3.94625H3.46126V5.25875H4.68001V3.94625H8.33624V5.25875H9.55499V3.94625H11.3831C11.6025 3.94625 11.7894 4.13875 11.7894 4.38375V12.2587Z" fill="currentColor"/>
+            </svg>
+            <span class="button-text hidden">
+              {%- if pre_order -%}
+                <span class="button-text">{{ 'products.product.preorder' | t }}</span>
+              {%- else -%}
+                {{- 'products.product.add_to_cart' | t -}}
+              {%- endif -%}
+            </span>
+            <span class="product-price-main hidden">{{ money_price }}</span>
+          </span>
+        {%- endunless -%}
+      </span>
+
+      <span class="button-loader loading--spinner hidden">
+        <svg width="25" height="25" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="6" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
+          </circle>
+        </svg>
+      </span>
+    </button>
+  </div>
+
+  <!-- MOBILE LAYOUT -->
+  <div class="sticky-bar-mobile-layout">
+    {%- liquid
+      assign sticky_mobile_size_label = 'Taglia'
+      assign sticky_mobile_size_value = blank
+      assign sticky_mobile_size_option_name = settings.sizename | downcase
+      for option in product.options_with_values
+        assign option_name = option.name | downcase
+        if sticky_mobile_size_option_name contains option_name or option_name contains 'size' or option_name contains 'taglia'
+          assign sticky_mobile_size_label = option.name
+          assign sticky_mobile_size_value = option.selected_value
+          break
+        endif
+      endfor
+      if sticky_mobile_size_value == blank
+        assign sticky_mobile_size_value = current_variant.option3 | default: current_variant.option2 | default: current_variant.option1
+      endif
+    -%}
+
+    {%- assign sibling_products = product.metafields.custom.linked_products.value -%}
+    {%- if sibling_products != blank -%}
+      <div class="sticky-mobile-color-row">
+        <span class="sticky-mobile-option-label">
+          {{- product.metafields.custom.colore.value.label | default: 'Colore' }}:</span
+        >
+        <div class="sticky-mobile-color-swatches">
+          {%- for sibling in sibling_products -%}
+            {%- assign color_meta = sibling.metafields.custom.colore.value -%}
+            <a
+              href="{{ sibling.url }}"
+              class="sticky-color-dot{% if sibling.id == product.id %} is-active{% endif %}"
+              title="{{ color_meta.label }}"
+              aria-label="{{ color_meta.label }}"
+              style="background-color: {{ color_meta.color | default: '#cccccc' }};"
+            ></a>
+          {%- endfor -%}
+        </div>
+        {% if sticky_mobile_size_value != blank %}
+          <span class="sticky-mobile-size-readonly">
+            {{ sticky_mobile_size_label }}:
+            <span class="sticky-mobile-size-value">{{ sticky_mobile_size_value }}</span>
+          </span>
+        {% endif %}
+      </div>
+    {%- elsif sticky_mobile_size_value != blank -%}
+      <div class="sticky-mobile-color-row">
+        <span class="sticky-mobile-size-readonly">
+          {{ sticky_mobile_size_label }}:
+          <span class="sticky-mobile-size-value">{{ sticky_mobile_size_value }}</span>
+        </span>
+      </div>
+    {%- endif -%}
+
+    {%- unless product.has_only_default_variant -%}
+      {%- liquid
+        assign size_options_name = settings.sizename | downcase
+        assign has_sticky_mobile_options = false
+        for option in product.options_with_values
+          assign option_name = option.name | downcase
+          unless size_options_name contains option_name
+            assign has_sticky_mobile_options = true
+            break
+          endunless
+        endfor
+      -%}
+      {% if has_sticky_mobile_options %}
+        <div class="sticky-mobile-variants">
+          {%- for option in product.options_with_values -%}
+            {%- assign option_name = option.name | downcase -%}
+            {% unless size_options_name contains option_name %}
+              <div class="sticky-mobile-option-wrap">
+                <label class="sticky-mobile-option-label">
+                  {{ option.name }}:
+                  <span class="sticky-mobile-option-value" data-option-label="{{ option.position }}">
+                    {{- option.selected_value -}}
+                  </span>
+                </label>
+                <div class="sticky-mobile-select-wrap">
+                  <svg width="9" height="7" class="sticky-mobile-chevron" viewBox="0 0 10 7" aria-hidden="true">
+                    <path d="m1 1 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                  <select
+                    class="sticky-mobile-select"
+                    data-sticky-option-pos="{{ option.position }}"
+                    data-option-name="{{ option.name | escape }}"
+                    aria-label="{{ option.name | escape }}"
+                  >
+                    {%- for value in option.values -%}
+                      {%- liquid
+                        assign is_available = false
+                        for variant in product.variants
+                          if variant.options contains value and variant.available
+                            assign is_available = true
+                            break
+                          endif
+                        endfor
+                      -%}
+                      {% if is_available %}
+                        <option
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}
+                            selected
+                          {% endif %}
+                        >
+                          {{ value }}
+                        </option>
+                      {% endif %}
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div>
+            {% endunless %}
+          {%- endfor -%}
+        </div>
+      {% endif %}
+    {%- endunless -%}
+
+    <button
+      type="submit"
+      name="add"
+      class="sticky-mobile-atc-btn atc-button {{ settings.button_font }}-font"
+      form="{{ 'product-form-' | append: section.id }}"
+      data-sticky-mobile-atc
+      {% unless current_variant.available %}
+        disabled
+      {% endunless %}
+      {% if settings.enable_cartdrawer %}
+        data-add-to-cart
+      {% endif %}
+      data-add-to-cart-main
+    >
+      <span data-add-to-cart-text>
+        <span class="button-text">
+          {%- if current_variant.available -%}
+            {%- if pre_order -%}
+              {{- 'products.product.preorder' | t -}}
+            {%- else -%}
+              {{- 'products.product.add_to_cart' | t -}}
+            {%- endif -%}
+          {%- else -%}
+            {{- 'products.product.sold_out' | t -}}
+          {%- endif -%}
+        </span>
+      </span>
+      <span class="button-loader loading--spinner hidden">
+        <svg width="20" height="20" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="6" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
+          </circle>
+        </svg>
+      </span>
+    </button>
+  </div>
+</sticky-bar-product>
+
+<script>
+  (function () {
+    var sectionId = '{{ section.id }}';
+    var stickyBar = document.querySelector('sticky-bar-product[data-section="' + sectionId + '"]');
+    var footer = document.querySelector('footer');
+    var mainAddToCartBtn = document.getElementById('add-to-cart-' + sectionId);
+    var hasSeenMainAddToCart = false;
+    var hasScrolledPastMainAddToCart = false;
+    var isMainAddToCartVisible = false;
+    if (!stickyBar) return;
+
+    function isFooterVisible() {
+      var footerIsVisible = false;
+      if (footer) {
+        var footerRect = footer.getBoundingClientRect();
+        footerIsVisible = footerRect.top <= window.innerHeight;
+      }
+      return footerIsVisible;
+    }
+
+    function updateStickyVisibility() {
+      if (hasScrolledPastMainAddToCart && !isMainAddToCartVisible && !isFooterVisible()) {
+        stickyBar.classList.add('is-visible');
+      } else {
+        stickyBar.classList.remove('is-visible');
+      }
+    }
+
+    if (mainAddToCartBtn && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            isMainAddToCartVisible = entry.isIntersecting;
+            if (entry.isIntersecting) {
+              hasSeenMainAddToCart = true;
+            } else if (hasSeenMainAddToCart && entry.boundingClientRect.top < 0) {
+              hasScrolledPastMainAddToCart = true;
+            }
+          });
+          updateStickyVisibility();
+        },
+        { threshold: 0 }
+      );
+
+      observer.observe(mainAddToCartBtn);
+    }
+
+    window.addEventListener('scroll', updateStickyVisibility, { passive: true });
+    updateStickyVisibility();
+
+    // Event delegation: listener on sticky-bar-product persists through innerHTML replacements
+    stickyBar.addEventListener('change', function (e) {
+      var target = e.target;
+
+      // Handle sticky mobile select changes
+      if (target && target.classList.contains('sticky-mobile-select')) {
+        var pos = target.getAttribute('data-sticky-option-pos');
+        var optionName = target.getAttribute('data-option-name');
+        var value = target.value;
+
+        // Instant label update (before async server re-render)
+        var label = stickyBar.querySelector('.sticky-mobile-option-value[data-option-label="' + pos + '"]');
+        if (label) label.textContent = value;
+
+        var mainVariantSet = document.querySelector('variant-set-option[data-section="' + sectionId + '"]');
+        if (!mainVariantSet) return;
+
+        // Try radio input (swatch style)
+        var radios = mainVariantSet.querySelectorAll('input[name="color-option-' + pos + '"]');
+        var matchedRadio = null;
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].value === value) {
+            matchedRadio = radios[i];
+            break;
+          }
+        }
+        if (matchedRadio) {
+          matchedRadio.checked = true;
+          matchedRadio.dispatchEvent(new Event('change', { bubbles: true }));
+          return;
+        }
+
+        // Try select dropdown style
+        var mainSelects = mainVariantSet.querySelectorAll('select');
+        for (var j = 0; j < mainSelects.length; j++) {
+          if (mainSelects[j].getAttribute('name') === optionName) {
+            mainSelects[j].value = value;
+            mainSelects[j].dispatchEvent(new Event('change', { bubbles: true }));
+            break;
+          }
+        }
+      }
+    });
+  })();
+</script>

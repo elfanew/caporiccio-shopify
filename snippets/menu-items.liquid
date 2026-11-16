@@ -1,0 +1,144 @@
+{% if section.settings.menu %}
+  <nav class="site-navbar-main-wrapper">
+    <ul class="list-style-none navbar-menu {% if section.settings.enable_menu_background %}background--true{% endif %}">
+      {% for link in section.settings.menu.links %}
+        {% liquid
+          assign mega_menu_status = false
+          assign link_title = link.title | downcase
+          for block in section.blocks
+            assign mega_menu_title = block.settings.menu_label | downcase
+            if mega_menu_title == link_title
+              capture collections_content
+                if block.settings.collection_list.count > 0
+                  render 'block-menu-item', type: 'collections_content', block: block
+                endif
+              endcapture
+              capture custom_content
+                for i in (1..5)
+                  assign image_setting = 'content_image_' | append: i
+                  assign heading_setting = 'content_heading_' | append: i
+                  assign subheading_setting = 'content_subheading_' | append: i
+                  assign link_setting = 'content_link_' | append: i
+                  render 'block-menu-item', type: 'custom_content', image: block.settings[image_setting], heading: block.settings[heading_setting], subheading: block.settings[subheading_setting], link: block.settings[link_setting]
+                endfor
+              endcapture
+              if collections_content != blank or custom_content != blank
+                assign mega_menu_status = true
+                break
+              endif
+            endif
+          endfor
+        %}
+
+        <li class="nav-item {% if mega_menu_status %} megamenu{% endif %}">
+          <a class="menu-link {{ settings.navigation_font }}-font" href="{{ link.url }}">
+            {{ link.title }}
+            {% if mega_menu_status or link.levels > 0 %}
+              <svg
+                width="12"
+                height="12"
+                class="menu-icon"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9.75 4.5L6 8.25L2.25 4.5" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            {% endif %}
+          </a>
+          {% if mega_menu_status %}
+            <div class="megamenu-main--wrapper">
+              <div class="megamenu-card">
+                <div class="page--width megamenu-contain">
+                  <div class="megamenu-card--inner">
+                    {% if collections_content != blank %}
+                      <div class="megamenu-items">
+                        <ul role="list" class="list-style-none megamenu-coll--listing">
+                          {{ collections_content }}
+                        </ul>
+                      </div>
+                    {% endif %}
+                    {% if link.levels > 1 %}
+                      {% for childlink in link.links %}
+                        <div class="megamenu-items">
+                          <a
+                            href="{{ childlink.url }}"
+                            class="h6 megamenu-link megamenu-link-main {{ settings.navigation_font }}-font"
+                          >
+                            {{- childlink.title -}}
+                          </a>
+                          {% if childlink.levels > 0 %}
+                            <ul class="list-style-none megamenu-items-inner">
+                              {% for grandchildlink in childlink.links %}
+                                <li>
+                                  <a
+                                    href="{{ grandchildlink.url }}"
+                                    class="link-reversed megamenu-link {{ settings.navigation_font }}-font"
+                                  >
+                                    {{- grandchildlink.title -}}
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    {% endif %}
+                    {% if custom_content != blank %}
+                      {{ custom_content }}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% elsif link.levels > 0 %}
+            <div class="dropdown-menu--wrapper">
+              <div class="dropdown-contain">
+                <ul class="list-style-none dropdown-menu-nav" role="list">
+                  {% for childlink in link.links %}
+                    <li class="relative">
+                      <a href="{{ childlink.url }}" class="link-reversed {{ settings.navigation_font }}-font">
+                        {{ childlink.title -}}
+                        {% if childlink.levels > 0 %}
+                          <svg
+                            width="12"
+                            height="12"
+                            class="menu-icon"
+                            viewBox="0 0 12 12"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M9.75 4.5L6 8.25L2.25 4.5" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg>
+                        {% endif %}
+                      </a>
+                      {% if childlink.levels > 0 %}
+                        <div class="dropdown-menu--wrapper">
+                          <div class="dropdown-contain ////">
+                            <ul class="list-style-none dropdown-menu-nav" role="list">
+                              {% for grandchildlink in childlink.links %}
+                                <li>
+                                  <a
+                                    class="link-reversed"
+                                    class="{{ settings.navigation_font }}-font"
+                                    href="{{ grandchildlink.url }}"
+                                  >
+                                    {{- grandchildlink.title -}}
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

@@ -1,0 +1,749 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_pQDJzd": {
+      "type": "slideshow",
+      "blocks": {
+        "image_slide_ghkaXA": {
+          "type": "image_slide",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "image": "shopify://shop_images/Sito_capispalla_promo_1920x1080_1.jpg",
+            "mobile_image": "shopify://shop_images/Sito_capispalla_promo_1280x1780_1.jpg",
+            "slide_link": "shopify://collections/giubbini",
+            "image_focal_point": "center center",
+            "show_buttons_mobile": false,
+            "collection_list_enable": true,
+            "collection_list": [
+              "giubbini-1"
+            ],
+            "content_width": "medium",
+            "content_alignment": "left",
+            "content_position": "bottom--left",
+            "content_position_mobile": "bottom--left",
+            "heading_visibility": "both",
+            "heading": "",
+            "heading_size": "h2",
+            "heading_seo": "h1",
+            "description": "",
+            "description_size": "text-lg",
+            "description_visibility": "both",
+            "btn_text": "Scopri",
+            "btn_link": "shopify://collections/giubbini-1",
+            "btn_size": "sm",
+            "button_style": "solid",
+            "hover_effect": "standard",
+            "btn_text_2": "Shop now",
+            "btn_link_2": "shopify://collections/giubbini",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "overlay_color": "#000000",
+            "overlay_opacity": 5
+          }
+        },
+        "image_slide_bFjWLh": {
+          "type": "image_slide",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "image": "shopify://shop_images/Sito_nuova_collezione_1920x1080_01.jpg",
+            "mobile_image": "shopify://shop_images/Sito_nuova_collezione_1920x1080_01.jpg",
+            "slide_link": "shopify://collections/new-collection",
+            "image_focal_point": "center center",
+            "show_buttons_mobile": false,
+            "collection_list_enable": true,
+            "collection_list": [],
+            "content_width": "small",
+            "content_alignment": "left",
+            "content_position": "bottom--left",
+            "content_position_mobile": "bottom--left",
+            "heading_visibility": "both",
+            "heading": "",
+            "heading_size": "h2",
+            "heading_seo": "h1",
+            "description": "",
+            "description_size": "text-lg",
+            "description_visibility": "both",
+            "btn_text": "SCOPRI",
+            "btn_link": "shopify://collections/new-collection-s-s-26",
+            "btn_size": "md",
+            "button_style": "solid",
+            "hover_effect": "standard",
+            "btn_text_2": "SCOPRI",
+            "btn_link_2": "",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "image_slide_8B8yE7": {
+          "type": "image_slide",
+          "disabled": true,
+          "settings": {
+            "color_scheme": "scheme-3",
+            "image": "shopify://shop_images/Sito_camicia_comfort__1920x1080_01.jpg",
+            "mobile_image": "shopify://shop_images/Sito_camicia_comfort_1280x1780_56729e97-5ab0-47f8-906d-c838e9a9bca5.jpg",
+            "slide_link": "shopify://collections/camicie",
+            "image_focal_point": "center center",
+            "show_buttons_mobile": false,
+            "collection_list_enable": true,
+            "collection_list": [],
+            "content_width": "small",
+            "content_alignment": "left",
+            "content_position": "bottom--left",
+            "content_position_mobile": "bottom--left",
+            "heading_visibility": "both",
+            "heading": "le nostre camicie",
+            "heading_size": "h2",
+            "heading_seo": "h1",
+            "description": "",
+            "description_size": "text-lg",
+            "description_visibility": "both",
+            "btn_text": "SCOPRI",
+            "btn_link": "shopify://collections/camicie",
+            "btn_size": "md",
+            "button_style": "solid",
+            "hover_effect": "standard",
+            "btn_text_2": "SCOPRI",
+            "btn_link_2": "",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "overlay_color": "#000000",
+            "overlay_opacity": 6
+          }
+        }
+      },
+      "block_order": [
+        "image_slide_ghkaXA",
+        "image_slide_bFjWLh",
+        "image_slide_8B8yE7"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "enable_desktop_link": true,
+        "slide_style": "single",
+        "image_height": "full",
+        "mobile_image_height": "350",
+        "autoplay": true,
+        "autoplay_interval": 7,
+        "slide_gap": 0,
+        "desktop_alignment": "center",
+        "mobile_alignment": "center",
+        "icon_color": "#ffffff",
+        "icon_background": "#000000"
+      }
+    },
+    "collection_tab_XE8YEN": {
+      "type": "collection-tab",
+      "blocks": {
+        "collection_tab_peRAkm": {
+          "type": "collection-tab",
+          "settings": {
+            "collection_heading": "",
+            "collection": "camicie",
+            "btn_text": "Scopri",
+            "btn_size": "sm",
+            "button_style": "solid",
+            "hover_effect": "none"
+          }
+        },
+        "collection_tab_94jce4": {
+          "type": "collection-tab",
+          "settings": {
+            "collection_heading": "Pantaloni",
+            "collection": "pantaloni",
+            "btn_text": "Scopri",
+            "btn_size": "sm",
+            "button_style": "solid",
+            "hover_effect": "standard"
+          }
+        },
+        "collection_tab_nLLh99": {
+          "type": "collection-tab",
+          "settings": {
+            "collection_heading": "",
+            "collection": "giacche",
+            "btn_text": "Scopri",
+            "btn_size": "sm",
+            "button_style": "solid",
+            "hover_effect": "standard"
+          }
+        },
+        "collection_tab_iUQVbU": {
+          "type": "collection-tab",
+          "settings": {
+            "collection_heading": "Abiti",
+            "collection": "abiti-eleganti",
+            "btn_text": "Scopri",
+            "btn_size": "sm",
+            "button_style": "solid",
+            "hover_effect": "standard"
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_peRAkm",
+        "collection_tab_94jce4",
+        "collection_tab_nLLh99",
+        "collection_tab_iUQVbU"
+      ],
+      "custom_css": [],
+      "name": "Collection tabs",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "LOOK CURATI",
+        "heading_size": "h5",
+        "heading_seo": "h2",
+        "description": "",
+        "description_size": "text-lg",
+        "products_count": 6,
+        "mobile_item_per_row": "2",
+        "tab_style": "horizontal",
+        "image_size": "adapt",
+        "column_gap": 10,
+        "column_gap_mobile": 10,
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 35,
+        "bottom_space_mobile": 40
+      }
+    },
+    "slideshow_VpbUPm": {
+      "type": "slideshow",
+      "blocks": {
+        "image_slide_7WCnxY": {
+          "type": "image_slide",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/Caporiccio_Promo_40__sito_1920x1080_63377a47-5fb1-4739-9bd3-0302a49c4f03.jpg",
+            "mobile_image": "shopify://shop_images/Caporiccio_Promo_40__sito_mobile.jpg",
+            "slide_link": "shopify://collections/abiti-eleganti",
+            "image_focal_point": "bottom center",
+            "show_buttons_mobile": true,
+            "collection_list_enable": true,
+            "collection_list": [],
+            "content_width": "medium",
+            "content_alignment": "left",
+            "content_position": "bottom--left",
+            "content_position_mobile": "bottom--left",
+            "heading_visibility": "both",
+            "heading": "",
+            "heading_size": "h2",
+            "heading_seo": "h1",
+            "description": "",
+            "description_size": "text-lg",
+            "description_visibility": "both",
+            "btn_text": "Shop now",
+            "btn_link": "",
+            "btn_size": "sm",
+            "button_style": "solid",
+            "hover_effect": "standard",
+            "btn_text_2": "Shop now",
+            "btn_link_2": "",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_slide_7WCnxY"
+      ],
+      "custom_css": [],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "enable_desktop_link": true,
+        "slide_style": "single",
+        "image_height": "full",
+        "mobile_image_height": "400",
+        "autoplay": false,
+        "autoplay_interval": 3,
+        "slide_gap": 10,
+        "desktop_alignment": "start",
+        "mobile_alignment": "center",
+        "icon_color": "#ffffff",
+        "icon_background": "#000000"
+      }
+    },
+    "featured_collection_6VYBpJ": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "enable_slider": true,
+        "enable_card": false,
+        "heading": "",
+        "heading_size": "h5",
+        "heading_seo": "h2",
+        "description": "",
+        "description_size": "text-base",
+        "show_collection_title": false,
+        "collection": "saldi-70",
+        "image_size": "adapt",
+        "products_to_show": 6,
+        "column_per_row": 4,
+        "mobile_item_per_row": "2",
+        "column_gap": 6,
+        "column_gap_mobile": 6,
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 35,
+        "bottom_space_mobile": 35
+      }
+    },
+    "collection_carousel_QhjXMM": {
+      "type": "collection-carousel",
+      "blocks": {
+        "collection_jReBeJ": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "camicie-comfort-bielastiche",
+            "image": "shopify://shop_images/01_Extra_comfort.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "none",
+            "heading_size": "h3",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "lg",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "VEDI ALTRO",
+            "btn_link_2": "shopify://collections/camicie-comfort-bielastiche",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        },
+        "collection_67xcM6": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "camicie-comfort-bielastiche",
+            "image": "shopify://shop_images/02_Vestibilita.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "none",
+            "heading_size": "h3",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "lg",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "VEDI ALTRO",
+            "btn_link_2": "shopify://collections/camicie-comfort-bielastiche",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        },
+        "collection_gqcxgG": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "camicie-comfort-bielastiche",
+            "image": "shopify://shop_images/03_Tessuto_elastico.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "none",
+            "heading_size": "h3",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "sm",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "VEDI ALTRO",
+            "btn_link_2": "shopify://collections/camicie-comfort-bielastiche",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        },
+        "collection_9epLk6": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "camicie-comfort-bielastiche",
+            "image": "shopify://shop_images/04_Traspirabilita.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "none",
+            "heading_size": "h3",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "sm",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "VEDI ALTRO",
+            "btn_link_2": "shopify://collections/camicie-comfort-bielastiche",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        },
+        "collection_NMW6G8": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "camicie-comfort-bielastiche",
+            "image": "shopify://shop_images/05_Fast_dry.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "none",
+            "heading_size": "h3",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "sm",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "VEDI ALTRO",
+            "btn_link_2": "shopify://collections/camicie-comfort-bielastiche",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        },
+        "collection_7JTkAj": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "camicie-comfort-bielastiche",
+            "image": "shopify://shop_images/06_no_stiro.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "none",
+            "heading_size": "h3",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "lg",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "VEDI ALTRO",
+            "btn_link_2": "shopify://collections/camicie-comfort-bielastiche",
+            "btn_size_2": "sm",
+            "button_style_2": "solid",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_jReBeJ",
+        "collection_67xcM6",
+        "collection_gqcxgG",
+        "collection_9epLk6",
+        "collection_NMW6G8",
+        "collection_7JTkAj"
+      ],
+      "name": "Collection carousel",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "La nostra camicia comfort",
+        "heading_size": "h5",
+        "heading_seo": "h2",
+        "description": "",
+        "description_size": "text-lg",
+        "content_alignment": "center",
+        "image_ratio": "portrait",
+        "column_gap": 10,
+        "column_gap_mobile": 10,
+        "enable_desktop_link": true,
+        "top_space_desktop": 50,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 40
+      }
+    },
+    "featured_collection_knYHgc": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "enable_slider": true,
+        "enable_card": false,
+        "heading": "In Evidenza",
+        "heading_size": "h5",
+        "heading_seo": "h2",
+        "description": "",
+        "description_size": "text-base",
+        "show_collection_title": false,
+        "collection": "in-evidenza",
+        "image_size": "adapt",
+        "products_to_show": 6,
+        "column_per_row": 4,
+        "mobile_item_per_row": "2",
+        "column_gap": 2,
+        "column_gap_mobile": 10,
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 35,
+        "bottom_space_mobile": 35
+      }
+    },
+    "collection_carousel_34WGLQ": {
+      "type": "collection-carousel",
+      "blocks": {
+        "collection_AXL7Ug": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "new-collection",
+            "subheading": "",
+            "heading": "FW 26/27",
+            "text_description": "",
+            "text_visibility": "both",
+            "heading_size": "h2",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "Acquista ora",
+            "btn_link": "",
+            "btn_size": "sm",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "",
+            "btn_link_2": "",
+            "btn_size_2": "sm",
+            "button_style_2": "outline",
+            "hover_effect_2": "standard",
+            "image_focal_point": "center center",
+            "show_buttons_mobile": true
+          }
+        },
+        "collection_R9eP3B": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "camicie",
+            "image": "shopify://shop_images/6259_5102_250AA_CMFT_109_1.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "both",
+            "heading_size": "h2",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "Acquista ora",
+            "btn_link": "",
+            "btn_size": "sm",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "",
+            "btn_link_2": "",
+            "btn_size_2": "sm",
+            "button_style_2": "outline",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        },
+        "collection_DWpEgf": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "new-collection-s-s-26",
+            "image": "shopify://shop_images/7220_G497_BLU_GIAC_BOTT_2-1.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "both",
+            "heading_size": "h3",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "Acquista ora",
+            "btn_link": "",
+            "btn_size": "sm",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "",
+            "btn_link_2": "",
+            "btn_size_2": "sm",
+            "button_style_2": "outline",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        },
+        "collection_DfefVh": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "camicie",
+            "image": "shopify://shop_images/6530_5126_159FA_BML_108R_1.jpg",
+            "subheading": "",
+            "heading": "",
+            "text_description": "",
+            "text_visibility": "both",
+            "heading_size": "h2",
+            "heading_seo": "h2",
+            "product_list": [],
+            "btn_text": "Acquista ora",
+            "btn_link": "",
+            "btn_size": "lg",
+            "button_style": "text",
+            "hover_effect": "standard",
+            "btn_text_2": "",
+            "btn_link_2": "",
+            "btn_size_2": "sm",
+            "button_style_2": "outline",
+            "hover_effect_2": "standard",
+            "image_focal_point": "top center",
+            "show_buttons_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_AXL7Ug",
+        "collection_R9eP3B",
+        "collection_DWpEgf",
+        "collection_DfefVh"
+      ],
+      "name": "Collection carousel",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "New Collection FW 26/27",
+        "heading_size": "h5",
+        "heading_seo": "h2",
+        "description": "",
+        "description_size": "text-lg",
+        "content_alignment": "center",
+        "image_ratio": "square",
+        "column_gap": 10,
+        "column_gap_mobile": 10,
+        "enable_desktop_link": true,
+        "top_space_desktop": 50,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 40
+      }
+    },
+    "best_selling_products_Gi4jtA": {
+      "type": "best-selling-products",
+      "disabled": true,
+      "name": "Best selling products",
+      "settings": {
+        "color_scheme": "",
+        "background_image": "shopify://shop_images/Caporiccio_sito_promo_camicie_no_testi_1.jpg",
+        "image_height": "full",
+        "mobile_image_height": "350",
+        "marquee_heading": "",
+        "scrolling_speed": 15,
+        "heading": "",
+        "heading_size": "h4",
+        "heading_seo": "h2",
+        "description": "Dal 23 Marzo al 7 Aprile acquista 3 camicie la meno cara è scontata del 50%",
+        "description_size": "text-lg",
+        "secondary_color_scheme": "",
+        "product_list_heading": "PRODOTTI DI TENDENZA",
+        "product_list": [
+          "camicia-a-righe-blu-in-cotone-regular-fit",
+          "camicia-bianca-fantasia-pois-regular-fit",
+          "camicia-bianca-in-cotone-operato-nido-dape-button-down",
+          "camicia-bianca-in-cotone-stretch-collo-italiano",
+          "camicia-bianca-in-tessuto-leggero-comfort-bielastico",
+          "camicia-blu-fantasia-pois-regular-fit",
+          "camicia-blu-in-cotone-operato-nido-dape-button-down",
+          "camicia-blu-in-cotone-stretch-collo-italiano",
+          "camicia-blu-in-tessuto-leggero-comfort-bielastico",
+          "camicia-celeste-in-cotone-operato-nido-dape-button-down",
+          "camicia-celeste-in-cotone-stretch-collo-italiano"
+        ],
+        "column_per_row": 5,
+        "mobile_item_per_row": "2",
+        "image_size": "adapt",
+        "column_gap": 3,
+        "column_gap_mobile": 4,
+        "btn_text": "ESPLORA PRODOTTi",
+        "btn_size": "md",
+        "button_style": "solid",
+        "hover_effect": "standard",
+        "overlay_color": "#000000",
+        "overlay_opacity": 18,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
+    "rich_text_qyn6Ej": {
+      "type": "rich-text",
+      "blocks": {
+        "description_LwAw4e": {
+          "type": "description",
+          "settings": {
+            "description": "<p>Indossare un bel vestito è come svegliarsi con un buon caffè: un piacere che ti scalda il cuore, ogni giorno. Caporiccio è così, un brand dal carattere profondamente italiano, che da settant’anni produce abbigliamento di gusto classico, pensato per l’uomo che voglia sentirsi elegante nei più disparati contesti della vita quotidiana.</p>",
+            "description_size": "text-lg"
+          }
+        }
+      },
+      "block_order": [
+        "description_LwAw4e"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "scheme-8e3a1a8e-c7d2-4d85-a957-794328d96963",
+        "content_alignment": "center",
+        "option_style": "none",
+        "content_width": "small",
+        "top_space_desktop": 100,
+        "bottom_space_desktop": 100,
+        "top_space_mobile": 60,
+        "bottom_space_mobile": 60
+      }
+    }
+  },
+  "order": [
+    "slideshow_pQDJzd",
+    "collection_tab_XE8YEN",
+    "slideshow_VpbUPm",
+    "featured_collection_6VYBpJ",
+    "collection_carousel_QhjXMM",
+    "featured_collection_knYHgc",
+    "collection_carousel_34WGLQ",
+    "best_selling_products_Gi4jtA",
+    "rich_text_qyn6Ej"
+  ]
+}
