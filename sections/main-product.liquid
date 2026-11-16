@@ -1,6 +1,19 @@
 {{ 'product.css' | asset_url | stylesheet_tag: preload: true }}
 {{ 'product.css' | asset_url | stylesheet_tag }}
 {{ 'photoswipe.css' | asset_url | stylesheet_tag }}
+<style>
+  @media screen and (max-width: 768px) {
+    #scroll-to-top,
+    .whatsapp-float,
+    #CookiebotWidget,
+    [id^='CookiebotWidget'],
+    [class*='CookiebotWidget'] {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+  }
+</style>
 
 {% assign current_variant = product.selected_or_first_available_variant %}
 
@@ -80,7 +93,6 @@
 <script type="application/ld+json">
   {{ product | structured_data }}
 </script>
-
 
 <style>
   #shopify-section-{{ section.id }} {
@@ -607,106 +619,3 @@
   ]
 }
 {% endschema %}
-
-
-<script>
-document.addEventListener('click', function(e) {
-  const btn = e.target.closest('[data-add-to-cart-main]');
-  
-  if (btn) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const form = btn.closest('form') ||
-      (btn.getAttribute('form') ? document.getElementById(btn.getAttribute('form')) : null);
-    if (!form) return;
-    const variantId = form.querySelector('input[name="id"]').value;
-    const formId = form.getAttribute('id');
-    const qtyInput = formId 
-      ? document.querySelector(`input[name="quantity"][form="${formId}"]`) 
-      : form.querySelector('input[name="quantity"]');
-
-    const qty = qtyInput ? qtyInput.value : 1;
-    
-    const btnText = btn.querySelector('.button-text') || btn;
-    const originalText = btnText.innerHTML;
-
-    // Stato di caricamento
-    btn.disabled = true;
-    btnText.innerHTML = "Aggiunta...";
-
-    const formData = {
-      'items': [{
-        'id': parseInt(variantId),
-        'quantity': parseInt(qty)
-      }]
-    };
-
-    fetch(window.Shopify.routes.root + 'cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    })
-    .then(response => {
-      if (!response.ok) throw new Error('Errore AJAX');
-      return response.json();
-    })
-    .then(data => {
-      // Feedback pulsante
-      btn.disabled = false;
-      btnText.innerHTML = "Aggiunto! ✓";
-      showToastFeedback("Prodotto aggiunto correttamente!");
-
-      // AGGIORNAMENTO DINAMICO CONTATORE HEADER
-      fetch(window.Shopify.routes.root + 'cart.js')
-        .then(res => res.json())
-        .then(cart => {
-          // Cerchiamo l'elemento in tutti i modi possibili basandoci sul tuo screenshot
-          const cartCountElements = document.querySelectorAll('.data-item-count, [data-item-count], .header-icon span');
-          
-          cartCountElements.forEach(el => {
-            el.textContent = cart.item_count;
-            el.innerHTML = cart.item_count; // Proviamo entrambi
-            el.classList.remove('hidden');
-          });
-
-          // Se il tema ha un carrello laterale, questo comando spesso forza l'apertura e il refresh
-          if (window.Shopify && Shopify.PaymentButton) {
-             // Tenta di chiamare il refresh nativo di molti temi premium
-             document.documentElement.dispatchEvent(new CustomEvent('cart:refresh'));
-          }
-
-          // Se vedi l'attributo data-cart-drawer nello screenshot, proviamo a svegliarlo
-          const drawerTrigger = document.querySelector('[data-cart-drawer]');
-          if (drawerTrigger) {
-            // Alcuni temi aggiornano il conteggio quando si "tocca" l'icona
-            drawerTrigger.dispatchEvent(new Event('change'));
-          }
-        });
-
-      setTimeout(() => { btnText.innerHTML = originalText; }, 2500);
-    })
-    .catch(err => {
-      console.error("Errore:", err);
-      form.submit(); // Backup tradizionale
-    });
-  }
-}, true);
-
-function showToastFeedback(message) {
-  let toast = document.getElementById('custom-atc-toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'custom-atc-toast';
-    toast.style.cssText = "position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#000; color:#fff; padding:15px 30px; border-radius:50px; z-index:10000; box-shadow:0 10px 25px rgba(0,0,0,0.2); font-family:sans-serif; transition:all 0.4s ease;";
-    document.body.appendChild(toast);
-  }
-  toast.innerText = message;
-  toast.style.display = 'block';
-  toast.style.opacity = '1';
-  setTimeout(() => { 
-    toast.style.opacity = '0';
-    setTimeout(() => { toast.style.display = 'none'; }, 400);
-  }, 3000);
-}
-</script>

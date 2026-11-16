@@ -103,7 +103,8 @@
   "newsletter": {
     "label": "Enter your email address",
     "success": "Thanks for subscribing",
-    "button_label": "Subscribe"
+    "button_label": "Subscribe",
+    "footer_description": "Sign up to receive all the latest news from Caporiccio"
   },
   "accessibility": {
     "skip_to_text": "Skip to content",

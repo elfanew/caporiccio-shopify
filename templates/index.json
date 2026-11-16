@@ -198,9 +198,7 @@
         "collection_tab_nLLh99",
         "collection_tab_iUQVbU"
       ],
-      "custom_css": [
-        "@media screen and (max-width: 768px) {.slider-controls {width: 100%; } .slider-controls a {order: 2; } .slider-controls .swiper-button-next {margin-right: auto; }}"
-      ],
+      "custom_css": [],
       "name": "Collection tabs",
       "settings": {
         "color_scheme": "scheme-2",

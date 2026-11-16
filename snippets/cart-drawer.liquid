@@ -19,7 +19,7 @@
           </svg>
         </close-btn>
       </a>
-    </modal-dialog-head> 
+    </modal-dialog-head>
     <modal-dialog-form
       id="cart-drawer-body-content"
       class="modal-dialog-form {% if cart.item_count == 0 %}empty-cart-drawer{% else %} section-{{ id }}{% endif %}"
@@ -56,15 +56,15 @@
             <div class="cart-login-wrapper">
               <p class="cart-title-login text-xxl heading-font">{{ 'general.cart.account' | t }}</p>
               <span class="text-sm">
-               <a href="{{- routes.account_login_url-}}" class="underline--link">
-                    <span class="button-text">{{'general.cart.login' | t}}</span
-                    ><span class="link-arrow">
-                      <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H8V8H7V1.707L1.354 7.354L1 7.707L0.293 7L0.646 6.646L6.293 1H0V0Z" fill="currentColor"></path>
-                      </svg>
-                    </span> </a
-                  >&nbsp;{{ 'general.cart.checkout_faster' | t }}</span
-                >
+                <a href="{{- routes.account_login_url-}}" class="underline--link">
+                  <span class="button-text">{{ 'general.cart.login' | t }}</span
+                  ><span class="link-arrow">
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H8V8H7V1.707L1.354 7.354L1 7.707L0.293 7L0.646 6.646L6.293 1H0V0Z" fill="currentColor"></path>
+                    </svg>
+                  </span> </a
+                >&nbsp;{{ 'general.cart.checkout_faster' | t -}}
+              </span>
             </div>
 
             {% if settings.collection_list != blank %}
@@ -385,7 +385,6 @@
                           product_form_id: product_form_id,
                           class: 'addToCart-icon'
                         %}
-                     
                       </div>
                       <div class="product-scroll-text text-sm">
                         <a
@@ -582,9 +581,6 @@
         </div>
         <div id="cart-drawer-errors"></div>
         <div class="action-wrapper flex" data-action-cart-checkout-buttons>
-          <a href="{{ routes.cart_url }}" class="button button-md button-secondary">
-            <span class="button-text">{{ 'general.cart.view_empty_cart' | t }}</span>
-          </a>
           <button type="submit" name="checkout" id="checkoutCart" form="cart" class="button button-md">
             <span class="button-text">{{ 'sections.cart.checkout' | t }}</span>
           </button>

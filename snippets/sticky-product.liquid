@@ -1,3 +1,12 @@
+:collection-tab{% liquid
+  assign pre_order = false
+  if settings.enable_preorder and current_variant.inventory_quantity <= 0 and current_variant.inventory_policy == 'continue'
+    assign pre_order = true
+  endif
+  assign selected_product = product.selected_or_first_available_variant
+  assign price = selected_product.price | default: 1999
+  assign money_price = price | money
+%}
 <sticky-bar-product
   class="product-sticky-bar block color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
@@ -61,6 +70,68 @@
       </div>
     </div>
 
+    <div class="sticky-bar-desktop-center">
+      {%- assign sibling_products = product.metafields.custom.linked_products.value -%}
+      {%- if sibling_products != blank -%}
+        <div class="sticky-bar-color-section">
+          <span class="sticky-bar-option-label">{{ product.metafields.custom.colore.value.label | default: 'Colore' }}:</span>
+          <div class="sticky-bar-color-swatches">
+            {%- for sibling in sibling_products -%}
+              {%- assign color_meta = sibling.metafields.custom.colore.value -%}
+              <a
+                href="{{ sibling.url }}"
+                class="sticky-color-dot{% if sibling.id == product.id %} is-active{% endif %}"
+                title="{{ color_meta.label }}"
+                aria-label="{{ color_meta.label }}"
+                style="background-color: {{ color_meta.color | default: '#cccccc' }};"
+              ></a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- liquid
+        assign size_options_name = settings.sizename | downcase
+        assign sticky_size_label = 'Taglia'
+        assign sticky_size_value = blank
+        assign sticky_size_position = 0
+        for option in product.options_with_values
+          assign option_name = option.name | downcase
+          if size_options_name contains option_name
+            assign sticky_size_label = option.name
+            assign sticky_size_value = option.selected_value
+            assign sticky_size_position = option.position
+            break
+          elsif option_name contains 'size'
+            assign sticky_size_label = option.name
+            assign sticky_size_value = option.selected_value
+            assign sticky_size_position = option.position
+            break
+          elsif option_name contains 'taglia'
+            assign sticky_size_label = option.name
+            assign sticky_size_value = option.selected_value
+            assign sticky_size_position = option.position
+            break
+          endif
+        endfor
+        if sticky_size_value == blank and product.options_with_values.size > 0
+          assign fallback_size_option = product.options_with_values | last
+          assign sticky_size_label = fallback_size_option.name
+          assign sticky_size_value = fallback_size_option.selected_value
+          assign sticky_size_position = fallback_size_option.position
+        endif
+        if sticky_size_value == blank
+          assign sticky_size_value = current_variant.option3 | default: current_variant.option2 | default: current_variant.option1
+        endif
+      -%}
+      {% if sticky_size_value != blank %}
+        <div class="sticky-bar-size-section">
+          <span class="sticky-bar-option-label">{{ sticky_size_label }}:</span>
+          <span class="sticky-bar-size-value" data-option-label="{{ sticky_size_position }}">{{ sticky_size_value }}</span>
+        </div>
+      {% endif %}
+    </div>
+
     <button
       type="submit"
       name="add"
@@ -89,8 +160,8 @@
               <path d="M11.3831 2.625H9.55499V1.53125C9.55499 0.69125 8.92124 0 8.13312 0H4.87501C4.09501 0 3.45313 0.6825 3.45313 1.53125V2.625H1.625C0.731251 2.625 0 3.40375 0 4.375V12.25C0 13.2125 0.723126 14 1.625 14H11.375C12.2687 14 13 13.2212 13 12.25V4.375C13 3.4125 12.2769 2.625 11.375 2.625H11.3831ZM4.68001 1.53125C4.68001 1.40875 4.76938 1.3125 4.88311 1.3125H8.14124C8.25499 1.3125 8.34437 1.40875 8.34437 1.53125V2.625H4.68813V1.53125H4.68001ZM11.7894 12.2587C11.7894 12.495 11.6106 12.6962 11.3831 12.6962H1.63313C1.41375 12.6962 1.22688 12.5037 1.22688 12.2587V4.38375C1.22688 4.1475 1.40563 3.94625 1.63313 3.94625H3.46126V5.25875H4.68001V3.94625H8.33624V5.25875H9.55499V3.94625H11.3831C11.6025 3.94625 11.7894 4.13875 11.7894 4.38375V12.2587Z" fill="currentColor"/>
             </svg>
             <span class="button-text hidden">
-              {%- if preOrder -%}
-                <span class="button-text">{{'products.product.preorder' | t}}</span>
+              {%- if pre_order -%}
+                <span class="button-text">{{ 'products.product.preorder' | t }}</span>
               {%- else -%}
                 {{- 'products.product.add_to_cart' | t -}}
               {%- endif -%}
@@ -112,10 +183,29 @@
 
   <!-- MOBILE LAYOUT -->
   <div class="sticky-bar-mobile-layout">
+    {%- liquid
+      assign sticky_mobile_size_label = 'Taglia'
+      assign sticky_mobile_size_value = blank
+      assign sticky_mobile_size_option_name = settings.sizename | downcase
+      for option in product.options_with_values
+        assign option_name = option.name | downcase
+        if sticky_mobile_size_option_name contains option_name or option_name contains 'size' or option_name contains 'taglia'
+          assign sticky_mobile_size_label = option.name
+          assign sticky_mobile_size_value = option.selected_value
+          break
+        endif
+      endfor
+      if sticky_mobile_size_value == blank
+        assign sticky_mobile_size_value = current_variant.option3 | default: current_variant.option2 | default: current_variant.option1
+      endif
+    -%}
+
     {%- assign sibling_products = product.metafields.custom.linked_products.value -%}
     {%- if sibling_products != blank -%}
       <div class="sticky-mobile-color-row">
-        <span class="sticky-mobile-option-label">{{ product.metafields.custom.colore.value.label | default: 'Colore' }}:</span>
+        <span class="sticky-mobile-option-label">
+          {{- product.metafields.custom.colore.value.label | default: 'Colore' }}:</span
+        >
         <div class="sticky-mobile-color-swatches">
           {%- for sibling in sibling_products -%}
             {%- assign color_meta = sibling.metafields.custom.colore.value -%}
@@ -128,35 +218,84 @@
             ></a>
           {%- endfor -%}
         </div>
+        {% if sticky_mobile_size_value != blank %}
+          <span class="sticky-mobile-size-readonly">
+            {{ sticky_mobile_size_label }}:
+            <span class="sticky-mobile-size-value">{{ sticky_mobile_size_value }}</span>
+          </span>
+        {% endif %}
+      </div>
+    {%- elsif sticky_mobile_size_value != blank -%}
+      <div class="sticky-mobile-color-row">
+        <span class="sticky-mobile-size-readonly">
+          {{ sticky_mobile_size_label }}:
+          <span class="sticky-mobile-size-value">{{ sticky_mobile_size_value }}</span>
+        </span>
       </div>
     {%- endif -%}
 
     {%- unless product.has_only_default_variant -%}
-      <div class="sticky-mobile-variants">
-        {%- for option in product.options_with_values -%}
-          <div class="sticky-mobile-option-wrap">
-            <label class="sticky-mobile-option-label">
-              {{ option.name }}:
-              <span class="sticky-mobile-option-value" data-option-label="{{ option.position }}">{{ option.selected_value }}</span>
-            </label>
-            <div class="sticky-mobile-select-wrap">
-              <svg width="9" height="7" class="sticky-mobile-chevron" viewBox="0 0 10 7" aria-hidden="true">
-                <path d="m1 1 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-              <select
-                class="sticky-mobile-select"
-                data-sticky-option-pos="{{ option.position }}"
-                data-option-name="{{ option.name | escape }}"
-                aria-label="{{ option.name | escape }}"
-              >
-                {%- for value in option.values -%}
-                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
-                {%- endfor -%}
-              </select>
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
+      {%- liquid
+        assign size_options_name = settings.sizename | downcase
+        assign has_sticky_mobile_options = false
+        for option in product.options_with_values
+          assign option_name = option.name | downcase
+          unless size_options_name contains option_name
+            assign has_sticky_mobile_options = true
+            break
+          endunless
+        endfor
+      -%}
+      {% if has_sticky_mobile_options %}
+        <div class="sticky-mobile-variants">
+          {%- for option in product.options_with_values -%}
+            {%- assign option_name = option.name | downcase -%}
+            {% unless size_options_name contains option_name %}
+              <div class="sticky-mobile-option-wrap">
+                <label class="sticky-mobile-option-label">
+                  {{ option.name }}:
+                  <span class="sticky-mobile-option-value" data-option-label="{{ option.position }}">
+                    {{- option.selected_value -}}
+                  </span>
+                </label>
+                <div class="sticky-mobile-select-wrap">
+                  <svg width="9" height="7" class="sticky-mobile-chevron" viewBox="0 0 10 7" aria-hidden="true">
+                    <path d="m1 1 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                  <select
+                    class="sticky-mobile-select"
+                    data-sticky-option-pos="{{ option.position }}"
+                    data-option-name="{{ option.name | escape }}"
+                    aria-label="{{ option.name | escape }}"
+                  >
+                    {%- for value in option.values -%}
+                      {%- liquid
+                        assign is_available = false
+                        for variant in product.variants
+                          if variant.options contains value and variant.available
+                            assign is_available = true
+                            break
+                          endif
+                        endfor
+                      -%}
+                      {% if is_available %}
+                        <option
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}
+                            selected
+                          {% endif %}
+                        >
+                          {{ value }}
+                        </option>
+                      {% endif %}
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div>
+            {% endunless %}
+          {%- endfor -%}
+        </div>
+      {% endif %}
     {%- endunless -%}
 
     <button
@@ -165,14 +304,18 @@
       class="sticky-mobile-atc-btn atc-button {{ settings.button_font }}-font"
       form="{{ 'product-form-' | append: section.id }}"
       data-sticky-mobile-atc
-      {% unless current_variant.available %}disabled{% endunless %}
-      {% if settings.enable_cartdrawer %}data-add-to-cart{% endif %}
+      {% unless current_variant.available %}
+        disabled
+      {% endunless %}
+      {% if settings.enable_cartdrawer %}
+        data-add-to-cart
+      {% endif %}
       data-add-to-cart-main
     >
       <span data-add-to-cart-text>
         <span class="button-text">
           {%- if current_variant.available -%}
-            {%- if preOrder -%}
+            {%- if pre_order -%}
               {{- 'products.product.preorder' | t -}}
             {%- else -%}
               {{- 'products.product.add_to_cart' | t -}}
@@ -194,48 +337,97 @@
 </sticky-bar-product>
 
 <script>
-(function () {
-  var sectionId = '{{ section.id }}';
-  var stickyBar = document.querySelector('sticky-bar-product[data-section="' + sectionId + '"]');
-  if (!stickyBar) return;
+  (function () {
+    var sectionId = '{{ section.id }}';
+    var stickyBar = document.querySelector('sticky-bar-product[data-section="' + sectionId + '"]');
+    var footer = document.querySelector('footer');
+    var mainAddToCartBtn = document.getElementById('add-to-cart-' + sectionId);
+    var hasSeenMainAddToCart = false;
+    var hasScrolledPastMainAddToCart = false;
+    var isMainAddToCartVisible = false;
+    if (!stickyBar) return;
 
-  // Event delegation: listener on sticky-bar-product persists through innerHTML replacements
-  stickyBar.addEventListener('change', function (e) {
-    var target = e.target;
-    if (!target || !target.classList.contains('sticky-mobile-select')) return;
-
-    var pos = target.getAttribute('data-sticky-option-pos');
-    var optionName = target.getAttribute('data-option-name');
-    var value = target.value;
-
-    // Instant label update (before async server re-render)
-    var label = stickyBar.querySelector('.sticky-mobile-option-value[data-option-label="' + pos + '"]');
-    if (label) label.textContent = value;
-
-    var mainVariantSet = document.querySelector('variant-set-option[data-section="' + sectionId + '"]');
-    if (!mainVariantSet) return;
-
-    // Try radio input (swatch style)
-    var radios = mainVariantSet.querySelectorAll('input[name="color-option-' + pos + '"]');
-    var matchedRadio = null;
-    for (var i = 0; i < radios.length; i++) {
-      if (radios[i].value === value) { matchedRadio = radios[i]; break; }
-    }
-    if (matchedRadio) {
-      matchedRadio.checked = true;
-      matchedRadio.dispatchEvent(new Event('change', { bubbles: true }));
-      return;
+    function isFooterVisible() {
+      var footerIsVisible = false;
+      if (footer) {
+        var footerRect = footer.getBoundingClientRect();
+        footerIsVisible = footerRect.top <= window.innerHeight;
+      }
+      return footerIsVisible;
     }
 
-    // Try select dropdown style
-    var mainSelects = mainVariantSet.querySelectorAll('select');
-    for (var j = 0; j < mainSelects.length; j++) {
-      if (mainSelects[j].getAttribute('name') === optionName) {
-        mainSelects[j].value = value;
-        mainSelects[j].dispatchEvent(new Event('change', { bubbles: true }));
-        break;
+    function updateStickyVisibility() {
+      if (hasScrolledPastMainAddToCart && !isMainAddToCartVisible && !isFooterVisible()) {
+        stickyBar.classList.add('is-visible');
+      } else {
+        stickyBar.classList.remove('is-visible');
       }
     }
-  });
-})();
+
+    if (mainAddToCartBtn && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            isMainAddToCartVisible = entry.isIntersecting;
+            if (entry.isIntersecting) {
+              hasSeenMainAddToCart = true;
+            } else if (hasSeenMainAddToCart && entry.boundingClientRect.top < 0) {
+              hasScrolledPastMainAddToCart = true;
+            }
+          });
+          updateStickyVisibility();
+        },
+        { threshold: 0 }
+      );
+
+      observer.observe(mainAddToCartBtn);
+    }
+
+    window.addEventListener('scroll', updateStickyVisibility, { passive: true });
+    updateStickyVisibility();
+
+    // Event delegation: listener on sticky-bar-product persists through innerHTML replacements
+    stickyBar.addEventListener('change', function (e) {
+      var target = e.target;
+
+      // Handle sticky mobile select changes
+      if (target && target.classList.contains('sticky-mobile-select')) {
+        var pos = target.getAttribute('data-sticky-option-pos');
+        var optionName = target.getAttribute('data-option-name');
+        var value = target.value;
+
+        // Instant label update (before async server re-render)
+        var label = stickyBar.querySelector('.sticky-mobile-option-value[data-option-label="' + pos + '"]');
+        if (label) label.textContent = value;
+
+        var mainVariantSet = document.querySelector('variant-set-option[data-section="' + sectionId + '"]');
+        if (!mainVariantSet) return;
+
+        // Try radio input (swatch style)
+        var radios = mainVariantSet.querySelectorAll('input[name="color-option-' + pos + '"]');
+        var matchedRadio = null;
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].value === value) {
+            matchedRadio = radios[i];
+            break;
+          }
+        }
+        if (matchedRadio) {
+          matchedRadio.checked = true;
+          matchedRadio.dispatchEvent(new Event('change', { bubbles: true }));
+          return;
+        }
+
+        // Try select dropdown style
+        var mainSelects = mainVariantSet.querySelectorAll('select');
+        for (var j = 0; j < mainSelects.length; j++) {
+          if (mainSelects[j].getAttribute('name') === optionName) {
+            mainSelects[j].value = value;
+            mainSelects[j].dispatchEvent(new Event('change', { bubbles: true }));
+            break;
+          }
+        }
+      }
+    });
+  })();
 </script>
