@@ -1997,15 +1997,6 @@ product-content-element .tab-link .tab-dot {
   stroke: currentcolor;
 }
 
-.product--description>*:first-child {
-  margin-top: 0;
-}
-
-.product--description li>p {
-  display: inline;
-  margin: 0;
-}
-
 /* Add To Cart Drawer */
 
 .free-shipping-bar {
@@ -2737,6 +2728,14 @@ ul.list-view li:first-child {
     padding: 1.3rem 1.875rem;
   }
 
+  :is(.featured-collection-section,
+    .related-products-wrapper,
+    .recently-view-products-wrapper,
+  ) .slider-controls {
+    position: absolute;
+    top: -4.2rem;
+    right: 0;
+  }
 
   .main-product-wrapper .main-product-media-wrapper {
     flex: 1;

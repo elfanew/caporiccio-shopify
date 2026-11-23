@@ -103,8 +103,7 @@
   "newsletter": {
     "label": "Inserisci il tuo indirizzo email",
     "success": "Grazie per esserti iscritto",
-    "button_label": "Iscriviti",
-    "footer_description": "Iscriviti per ricevere tutte le novità di Caporiccio"
+    "button_label": "Iscriviti"
   },
   "accessibility": {
     "skip_to_text": "Vai al contenuto",

@@ -56,7 +56,7 @@
                     {% if block.settings.collection_heading != blank or collection != blank %}
                       {{ block.settings.collection_heading | default: collection.title -}}
                     {% else %}
-                      {{ 'sections.collection_tab.title' | t }}
+                     {{'sections.collection_tab.title' | t}}
                     {% endif -%}
                   </span>
                 </a>
@@ -77,33 +77,34 @@
               {{ block.shopify_attributes }}
               data-tab-content
             >
-              <slider-component
-                class="swiper"
-                data-settings='
-                  {
-                    "loop": true,
-                    "slidesPerView": {{ section.settings.mobile_item_per_row }},
-                    "centeredSlides": false,
-                    "speed": 500,
-                    "spaceBetween": "{{ section.settings.column_gap_mobile }}px",
-                    "navigation": {
-                      "nextEl": ".swiper-button-next-{{ block.id }}",
-                      "prevEl": ".swiper-button-prev-{{ block.id }}"
+            <slider-component
+              class="swiper"
+              data-settings='
+                {
+                  "loop": true,
+                  "slidesPerView": {{ section.settings.mobile_item_per_row }},
+                  "centeredSlides": false,
+                  "speed": 500,
+                  "spaceBetween": "{{ section.settings.column_gap_mobile }}px",
+                  "navigation": {
+                    "nextEl": ".swiper-button-next-{{ block.id }}",
+                    "prevEl": ".swiper-button-prev-{{ block.id }}"
+                  },
+                  "grabCursor": true,
+                  "breakpoints": {
+                    "768": {
+                      "slidesPerView": 3,
+                      "spaceBetween": "{{ section.settings.column_gap }}px"
                     },
-                    "grabCursor": true,
-                    "breakpoints": {
-                      "768": {
-                        "slidesPerView": 3,
-                        "spaceBetween": "{{ section.settings.column_gap }}px"
-                      },
-                      "1081": {
-                        "slidesPerView": 4,
-                        "spaceBetween": "{{ section.settings.column_gap }}px"
-                      }
+                    "1081": {
+                      "slidesPerView": 4,
+                      "spaceBetween": "{{ section.settings.column_gap }}px"
                     }
                   }
-                '
-              >
+                }
+              '
+            >
+
                 <div class="swiper-wrapper" data-id="{{  block.id  }}">
                   {%- if block.settings.collection != blank and block.settings.collection.all_products_count > 0 -%}
                     {% for product in block.settings.collection.products limit: section.settings.products_count %}
@@ -146,8 +147,6 @@
                 </div>
               </slider-component>
               <div class="slider-controls {% if section.settings.products_count<=4  and block.settings.collection.products.size<= 4 %}desktop-hidden{% endif %}">
-                <div class="swiper-button-prev swiper-button swiper-button-prev-{{ block.id }}"></div>
-                <div class="swiper-button-next swiper-button swiper-button-next-{{ block.id }}"></div>
                 {%- if block.settings.btn_text != blank and block.settings.collection != blank -%}
                   <a
                     href="{{ block.settings.collection.url }}"
@@ -163,6 +162,8 @@
                     {% endif %}
                   </a>
                 {% endif %}
+                <div class="swiper-button-prev swiper-button swiper-button-prev-{{ block.id }}"></div>
+                <div class="swiper-button-next swiper-button swiper-button-next-{{ block.id }}"></div>
               </div>
             </collection-tab-items>
           {% endfor %}
@@ -189,30 +190,30 @@
 </style>
 {% schema %}
 {
-  "name": "t:sections.collection-tab.name",
-  "class": "section-collection-tab",
-  "tag": "section",
-  "disabled_on": {
+   "name": "t:sections.collection-tab.name",
+   "class": "section-collection-tab",
+   "tag": "section",
+   "disabled_on": {
     "groups": ["header", "footer"]
   },
   "settings": [
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:global.color_scheme.label",
-      "default": "scheme-1"
+        "type": "color_scheme",
+        "id":"color_scheme",
+        "label": "t:global.color_scheme.label",
+        "default":"scheme-1"
     },
     {
-      "type": "inline_richtext",
-      "id": "heading",
-      "label": "t:global.general_label.heading.label",
-      "default": "Heading"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "default": "h5",
-      "label": "t:global.heading_size.label",
+          "type":"inline_richtext",
+          "id":"heading",
+         "label": "t:global.general_label.heading.label",
+          "default":"Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "default": "h5",
+         "label": "t:global.heading_size.label",
       "options": [
         {
           "value": "h1",
@@ -220,15 +221,15 @@
         },
         {
           "value": "h2",
-          "label": "t:global.heading_size.options.h2.label"
+         "label": "t:global.heading_size.options.h2.label"
         },
         {
           "value": "h3",
-          "label": "t:global.heading_size.options.h3.label"
+         "label": "t:global.heading_size.options.h3.label"
         },
         {
           "value": "h4",
-          "label": "t:global.heading_size.options.h4.label"
+        "label": "t:global.heading_size.options.h4.label"
         },
         {
           "value": "h5",
@@ -236,107 +237,109 @@
         },
         {
           "value": "h6",
-          "label": "t:global.heading_size.options.h6.label"
+        "label": "t:global.heading_size.options.h6.label"
         }
       ]
-    },
-    {
-      "type": "select",
-      "id": "heading_seo",
-      "default": "h4",
-      "label": "t:global.heading_seo.label",
+
+        },
+        {
+          "type": "select",
+          "id": "heading_seo",
+          "default": "h4",
+          "label": "t:global.heading_seo.label",
       "info": "t:global.heading_seo.info",
       "options": [
-        {
-          "value": "h1",
-          "label": "t:global.heading_seo.options.h1.label"
-        },
-        {
-          "value": "h2",
-          "label": "t:global.heading_seo.options.h2.label"
-        },
-        {
-          "value": "h3",
-          "label": "t:global.heading_seo.options.h3.label"
-        },
-        {
-          "value": "h4",
+         {
+            "value": "h1",
+            "label": "t:global.heading_seo.options.h1.label"
+          },
+          {
+            "value": "h2",
+           "label": "t:global.heading_seo.options.h2.label"
+          },
+          {
+            "value": "h3",
+           "label": "t:global.heading_seo.options.h3.label"
+          },
+          {
+            "value": "h4",
           "label": "t:global.heading_seo.options.h4.label"
-        },
-        {
-          "value": "h5",
-          "label": "t:global.heading_seo.options.h5.label"
-        },
-        {
-          "value": "h6",
+          },
+          {
+            "value": "h5",
+            "label": "t:global.heading_seo.options.h5.label"
+          },
+          {
+            "value": "h6",
           "label": "t:global.heading_seo.options.h6.label"
-        }
-      ]
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "t:global.general_label.description.label",
-      "default": "Tell your brand's story through images"
-    },
-    {
-      "type": "select",
-      "id": "description_size",
-      "default": "text-lg",
-      "label": "t:global.description_size.label",
-      "options": [
-        {
-          "value": "text-xl",
-          "label": "t:global.description_size.options.x-large.label"
+          }
+        ]
         },
         {
-          "value": "text-lg",
-          "label": "t:global.description_size.options.large.label"
+          "type": "textarea",
+          "id": "description",
+          "label": "t:global.general_label.description.label",
+          "default":"Tell your brand's story through images"
         },
-        {
-          "value": "text-base",
-          "label": "t:global.description_size.options.medium.label"
+         {
+          "type": "select",
+          "id": "description_size",
+          "default": "text-lg",
+         "label": "t:global.description_size.label",
+          "options": [
+            {
+              "value": "text-xl",
+              "label": "t:global.description_size.options.x-large.label"
+            },
+            {
+              "value": "text-lg",
+              "label": "t:global.description_size.options.large.label"
+            },
+            {
+              "value": "text-base",
+              "label": "t:global.description_size.options.medium.label"
+            },
+            {
+              "value": "text-sm",
+              "label": "t:global.description_size.options.small.label"
+            },
+            {
+              "value": "text-xs",
+              "label": "t:global.description_size.options.x-small.label"
+
+            }
+          ]
         },
-        {
-          "value": "text-sm",
-          "label": "t:global.description_size.options.small.label"
-        },
-        {
-          "value": "text-xs",
-          "label": "t:global.description_size.options.x-small.label"
-        }
-      ]
-    },
     {
       "type": "range",
       "id": "products_count",
       "min": 4,
       "max": 6,
       "step": 1,
-      "label": "t:sections.collection-tab.settings.products_count.label",
+       "label":"t:sections.collection-tab.settings.products_count.label",
       "default": 5
     },
-    {
-      "type": "select",
-      "id": "mobile_item_per_row",
-      "label": "t:sections.collection-tab.settings.mobile_item_per_row.label",
-      "default": "2",
-      "options": [
-        {
-          "label": "t:sections.collection-tab.settings.mobile_item_per_row.options.options__1.label",
-          "value": "1"
-        },
-        {
-          "label": "t:sections.collection-tab.settings.mobile_item_per_row.options.options__2.label",
-          "value": "2"
-        }
-      ]
+     {
+          "type": "select",
+          "id": "mobile_item_per_row",
+          "label": "t:sections.collection-tab.settings.mobile_item_per_row.label",
+          "default":"2",
+          "options": [
+            {
+              "label": "t:sections.collection-tab.settings.mobile_item_per_row.options.options__1.label",
+              "value": "1"
+            },
+             {
+               "label": "t:sections.collection-tab.settings.mobile_item_per_row.options.options__2.label",
+              "value": "2"
+            }
+          ]
     },
     {
       "type": "select",
-      "id": "tab_style",
+      "id":"tab_style",
       "label": "t:sections.collection-tab.settings.tab_style.label",
-      "default": "vertical",
+      "default":"vertical",
       "options": [
         {
           "label": "t:sections.collection-tab.settings.tab_style.options.horizontal.label",
@@ -351,141 +354,145 @@
     {
       "type": "select",
       "id": "image_size",
-      "default": "adapt",
-      "label": "t:global.image_size.label",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:global.image_size.options.auto.label"
-        },
-        {
-          "value": "landscape",
-          "label": "t:global.image_size.options.landscape.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:global.image_size.options.portrait.label"
-        },
-        {
-          "value": "square",
-          "label": "t:global.image_size.options.square.label"
-        }
-      ]
+       "default": "adapt",
+       "label": "t:global.image_size.label",
+        "options": [
+          {
+            "value": "adapt",
+            "label": "t:global.image_size.options.auto.label"
+          },
+          {
+            "value": "landscape",
+            "label": "t:global.image_size.options.landscape.label"
+          },
+          {
+            "value": "portrait",
+            "label": "t:global.image_size.options.portrait.label"
+          },
+          {
+            "value": "square",
+            "label": "t:global.image_size.options.square.label"
+          }
+        ]
+    },
+    {
+        "type": "range",
+        "id":"column_gap",
+        "label":"t:global.general_label.column_gap.label",
+        "min":0,
+        "max":50,
+        "default":20,
+        "step": 1,
+        "unit": "px"
     },
     {
       "type": "range",
-      "id": "column_gap",
-      "label": "t:global.general_label.column_gap.label",
-      "min": 0,
-      "max": 50,
-      "default": 20,
+      "id":"column_gap_mobile",
+     "label":"t:global.general_label.column_gap_mobile.label",
+      "min":0,
+      "max":50,
+      "default":20,
       "step": 1,
       "unit": "px"
     },
-    {
-      "type": "range",
-      "id": "column_gap_mobile",
-      "label": "t:global.general_label.column_gap_mobile.label",
-      "min": 0,
-      "max": 50,
-      "default": 20,
-      "step": 1,
-      "unit": "px"
+     {
+    "type": "header",
+     "content": "t:global.section_spacing.content"
     },
     {
-      "type": "header",
-      "content": "t:global.section_spacing.content"
-    },
-    {
-      "type": "range",
-      "id": "top_space_desktop",
-      "label": "t:global.section_spacing.top_space_desktop.label",
-      "default": 70,
-      "min": 0,
-      "max": 150,
-      "step": 5
-    },
-    {
-      "type": "range",
-      "id": "bottom_space_desktop",
-      "label": "t:global.section_spacing.bottom_space_desktop.label",
-      "default": 70,
-      "min": 0,
-      "max": 150,
-      "step": 5
-    },
-    {
-      "type": "range",
-      "id": "top_space_mobile",
-      "label": "t:global.section_spacing.top_space_mobile.label",
-      "default": 40,
-      "min": 0,
-      "max": 100,
-      "step": 5
-    },
-    {
-      "type": "range",
-      "id": "bottom_space_mobile",
-      "label": "t:global.section_spacing.bottom_space_mobile.label",
-      "default": 40,
-      "min": 0,
-      "max": 100,
-      "step": 5
-    }
+    "type": "range",
+    "id": "top_space_desktop",
+   "label": "t:global.section_spacing.top_space_desktop.label",
+    "default": 70,
+    "min": 0,
+    "max": 150,
+    "step": 5
+  },
+  {
+    "type": "range",
+    "id": "bottom_space_desktop",
+   "label": "t:global.section_spacing.bottom_space_desktop.label",
+    "default": 70,
+    "min": 0,
+    "max": 150,
+    "step": 5
+  },
+  {
+    "type": "range",
+    "id": "top_space_mobile",
+    "label": "t:global.section_spacing.top_space_mobile.label",
+    "default": 40,
+    "min": 0,
+    "max": 100,
+    "step": 5
+  },
+  {
+    "type": "range",
+    "id": "bottom_space_mobile",
+     "label": "t:global.section_spacing.bottom_space_mobile.label",
+    "default": 40,
+    "min": 0,
+    "max": 100,
+    "step": 5
+  }
   ],
   "blocks": [
     {
       "type": "collection-tab",
-      "name": "t:sections.collection-tab.blocks.name",
+      "name":"t:sections.collection-tab.blocks.name",
       "settings": [
         {
           "type": "text",
           "id": "collection_heading",
-          "label": "t:global.general_label.heading.label"
+         "label": "t:global.general_label.heading.label"
         },
         {
           "type": "collection",
           "id": "collection",
           "label": "t:global.general_label.collection.label"
         },
-        {
+         {
           "type": "header",
-          "content": "t:global.header.button.content"
-        },
+            "content": "t:global.header.button.content"
+          },
         {
           "type": "text",
           "id": "btn_text",
           "label": "t:global.general_label.text.label",
-          "default": "Shop now"
+          "default":"Shop now"
         },
         {
           "type": "select",
           "id": "btn_size",
-          "default": "sm",
-          "label": "t:global.btn_size.label",
+           "default": "sm",
+            "label": "t:global.btn_size.label",
           "options": [
-            {
+           {
               "label": "t:global.btn_size.options.xsmall.label",
               "value": "xsm"
+
             },
             {
-              "label": "t:global.btn_size.options.small.label",
+             "label": "t:global.btn_size.options.small.label",
               "value": "sm"
+
             },
             {
               "label": "t:global.btn_size.options.medium.label",
               "value": "md"
+
             },
             {
-              "label": "t:global.btn_size.options.large.label",
+             "label": "t:global.btn_size.options.large.label",
               "value": "lg"
+
             }
           ]
         },
         {
-          "type": "select",
-          "id": "button_style",
-          "label": "t:global.button_style.label",
+          "type":"select",
+          "id":"button_style",
+           "label": "t:global.button_style.label",
           "options": [
             {
               "label": "t:global.button_style.options.solid.label",
@@ -497,13 +504,13 @@
             },
             {
               "label": "t:global.button_style.options.text.label",
-              "value": "text"
+              "value":"text"
             }
           ]
         },
         {
           "type": "select",
-          "id": "hover_effect",
+          "id":"hover_effect",
           "label": "t:global.hover_effect.label",
           "options": [
             {
@@ -514,7 +521,8 @@
               "label": "t:global.hover_effect.options.none.label",
               "value": "none"
             }
-          ]
+          ] 
+
         }
       ]
     }

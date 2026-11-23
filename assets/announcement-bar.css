@@ -9,9 +9,8 @@ announcement-slider {
 }
 
 .announcement-bar {
-  background: #2d2c2c;
-  color: rgba(var(--background-color));
-  border-bottom: 0.0625rem solid rgba(var(--background-color), 0.15);
+  background: rgba(var(--background-color));
+  color: rgba(var(--text-color));
 }
 
 .announcement-block {
@@ -33,7 +32,7 @@ announcement-slider {
   width: 0.625rem;
   height: 0.625rem;
   background: transparent;
-  color: rgb(var(--background-color));
+  color: rgb(var(--text-color));
   margin: 0;
   border: 0;
   transform: translateY(-50%);
@@ -51,7 +50,7 @@ announcement-slider {
   font-size: var(--text-small);
 }
 
-.announcement-bar-text+.announcement-bar-text {
+.announcement-bar-text + .announcement-bar-text {
   display: none;
 }
 
@@ -59,13 +58,11 @@ announcement-slider {
   text-align: center;
   font-size: var(--text-small);
 }
-
 .announcement-bar-text p {
   margin: 0;
   max-height: 2.375rem;
   overflow-y: auto;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+
   padding: 0rem 1rem;
 }
 
@@ -76,25 +73,24 @@ announcement-slider {
     grid-template-columns: auto 1fr auto;
     padding: 0.625rem 0;
   }
-
   .announcement-bar-content :is(.countdown-counter, .localization) {
     display: block;
   }
-
-  .announcement-bar:not(.announcement-with-currency, .announcement-with-counter) .announcement-block {
+  .announcement-bar:not(.announcement-with-currency, .announcement-with-counter)
+    .announcement-block {
     grid-area: span 1 / span 3;
   }
-
-  .announcement-bar.announcement-with-currency:not(.announcement-with-counter) .announcement-block,
-  .announcement-bar.announcement-with-counter:not(.announcement-with-currency) .announcement-block {
+  .announcement-bar.announcement-with-currency:not(.announcement-with-counter)
+    .announcement-block,
+  .announcement-bar.announcement-with-counter:not(.announcement-with-currency)
+    .announcement-block {
     grid-area: span 1 / span 2;
     margin: 0;
   }
-
-  .announcement-bar.announcement-with-counter:not(.announcement-with-currency) .announcement-block {
+  .announcement-bar.announcement-with-counter:not(.announcement-with-currency)
+    .announcement-block {
     margin-left: auto;
   }
-
   .announcement-bar--inner {
     padding: 2px 0;
   }
@@ -110,14 +106,13 @@ announcement-slider {
   .announcement-block {
     padding: 0.2rem 2rem;
   }
-
   .announcement-bar--inner {
     padding: 4px 0;
-  }
 }
-
+}
 @media (min-width: 768px) and (max-width: 1080px) {
   .announcement-bar {
     padding: .6rem 0;
   }
 }
+

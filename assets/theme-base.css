@@ -958,6 +958,7 @@ button.shopify-payment-button__button--unbranded {
 }
 
 .slider-controls .swiper-button {
+  position: static;
   margin: 0;
   border: 0.0625rem solid currentcolor;
 }

@@ -16,14 +16,14 @@
           "type": "image_slide",
           "settings": {
             "color_scheme": "scheme-3",
-            "image": "shopify://shop_images/Sito_capispalla_promo_1920x1080_1.jpg",
-            "mobile_image": "shopify://shop_images/Sito_capispalla_promo_1280x1780_1.jpg",
-            "slide_link": "shopify://collections/giubbini",
+            "image": "shopify://shop_images/Sito_promo_double_1920x1080_08a49a2a-16d1-4a48-a1ab-a08ab8e8047b.jpg",
+            "mobile_image": "shopify://shop_images/Sito_promo_double_1280x1780_be327f5c-902f-4a83-a27d-086b4f813690.jpg",
+            "slide_link": "shopify://collections/double",
             "image_focal_point": "center center",
             "show_buttons_mobile": false,
             "collection_list_enable": true,
             "collection_list": [
-              "giubbini-1"
+              "double"
             ],
             "content_width": "medium",
             "content_alignment": "left",
@@ -198,7 +198,9 @@
         "collection_tab_nLLh99",
         "collection_tab_iUQVbU"
       ],
-      "custom_css": [],
+      "custom_css": [
+        "@media screen and (max-width: 768px) {.slider-controls {width: 100%; } .slider-controls a {order: 2; } .slider-controls .swiper-button-next {margin-right: auto; }}"
+      ],
       "name": "Collection tabs",
       "settings": {
         "color_scheme": "scheme-2",

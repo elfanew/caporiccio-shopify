@@ -582,6 +582,9 @@
         </div>
         <div id="cart-drawer-errors"></div>
         <div class="action-wrapper flex" data-action-cart-checkout-buttons>
+          <a href="{{ routes.cart_url }}" class="button button-md button-secondary">
+            <span class="button-text">{{ 'general.cart.view_empty_cart' | t }}</span>
+          </a>
           <button type="submit" name="checkout" id="checkoutCart" form="cart" class="button button-md">
             <span class="button-text">{{ 'sections.cart.checkout' | t }}</span>
           </button>
